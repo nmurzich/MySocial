@@ -1,0 +1,22 @@
+.header {
+    grid-area: header;
+    background-color: greenyellow;
+    }
+    
+    .header img {
+        width: 40px
+            }
+    .item {
+        color: hotpink;
+    }
+
+    .active {
+        color: rgb(61, 42, 165);
+    }
+    
+
+   
+    
+    
+
+   

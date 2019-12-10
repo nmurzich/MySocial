@@ -1,0 +1,27 @@
+.grid {
+    display: grid;
+    grid-template-columns: 3fr 10fr;
+}
+.Sender  {
+    color: lightblue;
+    }
+
+    .Sender a {
+        text-decoration: none;
+    }
+
+    .SenderName
+{color:whitesmoke;}
+
+
+.Dialog {
+    color: red
+}
+
+.Mess {
+    color: red;
+}
+.MessNum {
+    color: blue
+}
+    
