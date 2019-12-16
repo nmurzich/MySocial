@@ -1,28 +1,29 @@
 import React from 'react';
 import Dialog from './Dialogs.module.css'
 import { NavLink } from "react-router-dom"
-import App from './../../../index'
-import {addDialogActionCreator, updateDiActionCreator} from '../../../Redux/dialogPageReducer'
-import DialogsContainer from './DialogsContainer'
 
+debugger
 
 const Dialogs = (props) => {
-let Redux = props.dialogPage
 
-    let SendersName = Redux.onames.map(n => <Senders name={n.name} id={n.id} />)
+    let SendersName = props.dialogPage.onames.map(n => <Senders name={n.name} id={n.id} />)
 
-    let MessName = Redux.messdata.map(m => <Mess dialog={m.dialog} />)
+    let MessName = props.dialogPage.messdata.map(m => <Mess dialog={m.dialog} />)
 
-    let addDialog = props.addDialog()
-    // let addDialog = () => {
-        // props.dispatch(addDialogActionCreator())
-        // }
+    let addDialog = () => {
+        props.addDialog()
+    }
 
     let onChangeDialogs = (e) => {
         let body = e.target.value
-        let action = updateDiActionCreator(body)
-        props.dispatch(action)
-    }
+        props.updateDi(body)}
+
+    
+    // let onChangeDialogs = (e) => {
+    //     let body = e.target.value
+    //     let action = updateDiActionCreator(body)
+    //     props.dispatch(action)
+    // }
 
     return (
         <div className='grid'>

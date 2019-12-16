@@ -11,16 +11,15 @@ import Settings from './components/Sidebar/Settings/Settings';
 import News from './components/Sidebar/News/News'
 import SidebarFriends from './components/Sidebar/SidebarFriends'
 import FriendsOnline from './components/Sidebar/FriendsOnline'
-import Redux from './Redux/store'
-import store from './Redux/store'
 import DialogsContainer from './/components/Sidebar/Dialogs/DialogsContainer'
+import PostContainer from './components/Content/PostContainer'
+import SidebarFriendsContainer from './components/Sidebar/SidebarFriendsContainer'
+import FriendsOnlineContainer from './components/Sidebar/FriendsOnlineContainer'
+import UsersContainer from './components/Sidebar/Dialogs/UsersContainer'
 
 
 
-
-
-
-const App = (props) => {
+const App = () => {
 
   
   return (
@@ -29,27 +28,35 @@ const App = (props) => {
     <div className="grid">
          <Header/>
          <Sidebar/>
-         <SidebarFriends friends = {store._Redux.friendsPage.friends} dispatch = {props.dispatch}/>
-         <FriendsOnline fof={store._Redux.friendsPage.fof}/>
+         <SidebarFriendsContainer 
+        //  store={props.store}
+        //  friends = {store._Redux.friendsPage.friends} dispatch = {props.dispatch}
+         />
+         <FriendsOnlineContainer/>
 
      
 
         <div className = "grid_content">
-        <Route exact path = '/Messages'render = {() => <DialogsContainer dispatch = {props.dispatch} 
-       store={props.store} messdata={store._Redux.dialogPage.messdata} onames={store._Redux.profilePage.onames} 
-        di={store._Redux.dialogPage.di}
+        <Route exact path = '/Messages'render = {() => <DialogsContainer 
+      //  store={store} 
+      // dispatch = {props.dispatch} 
+      //  messdata={store._Redux.dialogPage.messdata} onames={store._Redux.profilePage.onames} 
+      //   di={store._Redux.dialogPage.di}
         />}/>
         <Route path = '/Profile' render = {() => <Content 
-     onames={store._Redux.profilePage.onames} messages = {store._Redux.profilePage.messages} 
-       newText= {store._Redux.profilePage.newText}
+        // store={store}
+
+    //  onames={store._Redux.profilePage.onames} messages = {store._Redux.profilePage.messages} 
+    //    newText= {store._Redux.profilePage.newText}
       
         
-        dispatch = {props.dispatch}
+    //     dispatch = {props.dispatch}
     
         />}/>
         <Route path = '/music' render = {() => <Music/>}/>
         <Route path = '/settings'render = {()=> <Settings/>}/>
         <Route path = '/news' render = {()=><News/>}/>
+        <Route path = '/users' render = {()=><UsersContainer/>}/>
         
 
         

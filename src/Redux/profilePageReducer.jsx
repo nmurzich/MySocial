@@ -1,4 +1,4 @@
-let InitialRedux = {messages: [
+let InitialState = {messages: [
   { id: 1, message: "Hi, kapytka!", liked: 2, ava: 'HA' },
   { id: 2, message: 'Nice to meet u', liked: 4444, ava: 'MA' },
   { id: 3, message: 'Good night', liked: '5', ava: 'KY' }
@@ -11,23 +11,31 @@ onames: [
   { id: 5, name: 'Pasha' }
 ],
 newText: "128299"}
-const profilePageReducer = (Redux = InitialRedux, action) => {
+
+
+const profilePageReducer = (state = InitialState, action) => {
     switch (action.type) {
     case "ADD-POST": 
     let newPost = {
       id: 5,
-      message: Redux.newText,
+      message: state.newText,
       liked: 4,
       ava: 'MA'
-    }
-   Redux.messages.push(newPost)
-   return Redux
+    }     
+   return {...state, 
+    messages: [...state.messages, newPost],
+    newText:""
+  }
+
+   
+// state.messages.push(newPost)
       
 
   case "UPDATE-NEW-TEXT":
-    Redux.newText = action.body;
-        return Redux
-default: return Redux
+    // state.newText = action.body;
+        return {...state, 
+          newText: action.body}
+default: return state
 }
   }
   export default profilePageReducer

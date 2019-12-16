@@ -5,19 +5,24 @@ import App from './App'
 import {addPost, updateNewText, addDialog, updateDi} from './Redux/store'
 import {BrowserRouter} from 'react-router-dom'
 import {subscribe} from './Redux/store'
-import store from './Redux/store'
+import store from './Redux/redux-store'
+import {Provider} from 'react-redux'
 
 
-let rerenderIntireTree = (Redux) =>
+
+let rerenderIntireTree = (state) =>
 {
-ReactDOM.render(<BrowserRouter><App Redux={Redux} 
-    store={store}
+ReactDOM.render(<BrowserRouter>
+<Provider store = {store}>
+    <App 
+    // Redux={Redux} 
+    // store={store}
 
-    // newText ={store._Redux.profilePage.newText} 
-    di = {store._Redux.dialogPage.di}
+    // // newText ={store._Redux.profilePage.newText} 
+    // di = {store._Redux.dialogPage.di}
 
 
-    dispatch = {store.dispatch.bind(store)}
+    // dispatch = {store.dispatch.bind(store)}
     // addDialog={store.addDialog.bind(store)}
     // updateDi={store.updateDi.bind(store)}
         
@@ -26,11 +31,12 @@ ReactDOM.render(<BrowserRouter><App Redux={Redux}
 
     
     />
+    </Provider>
     </BrowserRouter>, document.getElementById('root'));
 }
-// rerenderIntireTree (store.getRedux())
+rerenderIntireTree (store.getState())
 
-rerenderIntireTree(store.getRedux());
+rerenderIntireTree(store.getState());
 store.subscribe(rerenderIntireTree);
 
 // store.subscribe (() =>
@@ -38,7 +44,10 @@ store.subscribe(rerenderIntireTree);
 //     let Redux = store.getRedux()
 //     rerenderIntireTree(Redux)
 // })
-
+// store.subscribe(() => {
+// let Redux = store.getRedux();
+// rerenderEntireTree(Redux);
+// });
 
 
 

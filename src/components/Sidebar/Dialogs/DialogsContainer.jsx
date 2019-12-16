@@ -1,20 +1,45 @@
-import store from '../../../Redux/store'
 import React from 'react';
-import reducers from '../../../Redux/redux-store'
-import dialogPageReducer from '../../../Redux/dialogPageReducer'
-import {addDialogActionCreator} from '../../../Redux/dialogPageReducer'
+import {addDialogActionCreator, updateDiActionCreator}  from '../../../Redux/dialogPageReducer'
 import Dialogs from '../Dialogs/Dialogs'
-
-const DialogsContainer = (props) => {
-    let Redux = props.store.getRedux().dialogPage
-    let addDialog = () => {
-        props.dispatch(addDialogActionCreator())
-        }
+import {connect} from 'react-redux'
 
 
-    return (
-        <div>
-    <Dialogs addDialog={addDialog} dialogPage={Redux}/></div>
-    )
+
+// const DialogsContainer = () => {
+//     return <myContext.Consumer> 
+//         {store => {
+
+//         let addDialog = () => {
+//         store.dispatch(addDialogActionCreator())
+//     }
+    
+//     let onChangeDialogs = (body) => {
+//         store.dispatch(updateDiActionCreator(body));
+//     }
+//     return     <Dialogs addDialog={addDialog}  updateDi={onChangeDialogs}
+//         />}
+// }
+//         </myContext.Consumer>
+        
+    
+    
+// }
+
+
+let makeStateToProps = (state) => {
+    return {
+    dialogPage: state.dialogPage,
+    di: state.dialogPage.di}
 }
+
+let makeStateToDispatch = (dispatch) => {
+    return {
+updateDi: (body) => {dispatch(updateDiActionCreator(body))},
+addDialog: () => {dispatch(addDialogActionCreator())}
+    }
+
+}
+
+
+const DialogsContainer = connect (makeStateToProps, makeStateToDispatch) (Dialogs)
 export default DialogsContainer

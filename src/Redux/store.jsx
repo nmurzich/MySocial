@@ -4,7 +4,7 @@ import sidebarFriendsReducer from './sidebarFriendsReducer'
 
 
 let store = {
-  _Redux: {
+  _state: {
     profilePage: {
       messages: [
         { id: 1, message: "Hi, kapytka!", liked: 2, ava: 'HA' },
@@ -54,37 +54,37 @@ let store = {
     },
 
   },
-  getRedux() {
-    return this._Redux
+  getState() {
+    return this._state
   },
 
   // addPost() {
   //   let newPost = {
   //     id: 5,
-  //     message: this._Redux.profilePage.newText,
+  //     message: this._state.profilePage.newText,
   //     liked: 4,
   //     ava: 'MA'
   //   }
-  //   this._Redux.profilePage.messages.push(newPost)
-  //   this._rerenderIntireTree(this._Redux)
+  //   this._state.profilePage.messages.push(newPost)
+  //   this._rerenderIntireTree(this._state)
   // },
 
   // addDialog() {
   //   let newDi = {
   //     id: 1,
-  //     dialog: this._Redux.dialogPage.di
+  //     dialog: this._state.dialogPage.di
   //   }
-  //   this._Redux.dialogPage.messdata.push(newDi)
-  //   this._rerenderIntireTree(this._Redux)
+  //   this._state.dialogPage.messdata.push(newDi)
+  //   this._rerenderIntireTree(this._state)
   // },
 
   // updateDi(text) {
-  //   this._Redux.dialogPage.di = text
-  //   this._rerenderIntireTree(this._Redux)
+  //   this._state.dialogPage.di = text
+  //   this._rerenderIntireTree(this._state)
   // },
   // updateNewText(body) {
-  //   this._Redux.profilePage.newText = body;
-  //   this._rerenderIntireTree(this._Redux)
+  //   this._state.profilePage.newText = body;
+  //   this._rerenderIntireTree(this._state)
   // },
 
   subscribe(observer) {
@@ -94,10 +94,10 @@ let store = {
   _callSubscriber() { console.log("qw") },
 
   dispatch(action) 
-  {this._Redux.profilePage = profilePageReducer(this._Redux.profilePage, action)
-    this._Redux.dialogPage = dialogPageReducer(this._Redux.dialogPage, action)
-    this._Redux.friendsPage = sidebarFriendsReducer (this._Redux.friendsPage, action)
-    this._callSubscriber(this._Redux);
+  {this._state.profilePage = profilePageReducer(this._state.profilePage, action)
+    this._state.dialogPage = dialogPageReducer(this._state.dialogPage, action)
+    this._state.friendsPage = sidebarFriendsReducer (this._state.friendsPage, action)
+    this._callSubscriber(this._state);
   }
   }
 
@@ -105,47 +105,47 @@ let store = {
     // if (action.type === "ADD-POST") {
     //   let newPost = {
     //     id: 5,
-    //     message: this._Redux.profilePage.newText,
+    //     message: this._state.profilePage.newText,
     //     liked: 4,
     //     ava: 'MA'
     //   }
 
-    //   this._Redux.profilePage.messages.push(newPost)
-    //   this._rerenderIntireTree(this._Redux)
+    //   this._state.profilePage.messages.push(newPost)
+    //   this._rerenderIntireTree(this._state)
     // }
 
     // else if (action.type === "UPDATE-NEW-TEXT") {
-    //   this._Redux.profilePage.newText = action.body;
-    //   this._rerenderIntireTree(this._Redux)
+    //   this._state.profilePage.newText = action.body;
+    //   this._rerenderIntireTree(this._state)
     // }
   //   else if (action.type === "ADD-FRIEND-MESSAGE") {
   //     let newText = {
   //       id: 1,
   //       name: 'Kolya',
   //       foto: 1,
-  //       message: this._Redux.friendsPage.myfriendPost
+  //       message: this._state.friendsPage.myfriendPost
   //     }
 
-  //     this._Redux.friendsPage.friends.push(newText)
-  //     this._rerenderIntireTree(this._Redux)
+  //     this._state.friendsPage.friends.push(newText)
+  //     this._rerenderIntireTree(this._state)
   //   }
 
   //   else if (action.type === "MY-FRIEND-MESSAGE") {
-  //     this._Redux.friendsPage.myfriendPost = action.body;
-  //     this._rerenderIntireTree(this._Redux)
+  //     this._state.friendsPage.myfriendPost = action.body;
+  //     this._rerenderIntireTree(this._state)
   //   }
   //     else if (action.type === "ADD-DIALOG") {
   //     let newDi = {
   //       id: 1,
-  //       dialog: this._Redux.dialogPage.di
+  //       dialog: this._state.dialogPage.di
   //     }
-  //     this._Redux.dialogPage.messdata.push(newDi)
-  //     this._rerenderIntireTree(this._Redux)
+  //     this._state.dialogPage.messdata.push(newDi)
+  //     this._rerenderIntireTree(this._state)
   //   }
 
   //   else if (action.type === "UPDATE-DI") {
-  //     this._Redux.dialogPage.di = action.newDialog;
-  //     this._rerenderIntireTree(this._Redux)
+  //     this._state.dialogPage.di = action.newDialog;
+  //     this._rerenderIntireTree(this._state)
   //   }
   // }
 // }
@@ -160,14 +160,14 @@ let store = {
 
 
 // dispatch (action) 
-// {if (action.type === 'UPDATE-NEW-TEXT') {this._Redux.profilePage.newText = action.text; this._rerenderIntireTree(this._Redux)}
+// {if (action.type === 'UPDATE-NEW-TEXT') {this._state.profilePage.newText = action.text; this._rerenderIntireTree(this._state)}
 //   else if (action.type === 'ADD-POST') {let newPost = {
 //     id: 5,
-//     message: this._Redux.profilePage.newText,
+//     message: this._state.profilePage.newText,
 //     liked: 4,
 //     ava: 'MA'}
-//     this._Redux.profilePage.messages.push(newPost)
-//     this._rerenderIntireTree(this._Redux)}}
+//     this._state.profilePage.messages.push(newPost)
+//     this._rerenderIntireTree(this._state)}}
 
 export default store
 
@@ -183,7 +183,7 @@ export default store
 //   console.log("qw")
 // }
 
-// let Redux = {
+// let state = {
 // profilePage: {
 //       messages: [
 //  {id: 1, message: "Hi, kapytka!", liked: 2, ava: 'HA'},
@@ -236,38 +236,38 @@ export default store
 // export const addPost = () => {
 // let newPost = {
 // id: 5,
-// message: Redux.profilePage.newText,
+// message: state.profilePage.newText,
 // liked: 4,
 // ava: 'MA'}
-// Redux.profilePage.messages.push(newPost)
+// state.profilePage.messages.push(newPost)
 
-// rerenderIntireTree(Redux)
+// rerenderIntireTree(state)
 
 // }
 
 // export const addDialog = () => {
 //   let newDi = {
 //     id: 1,
-//     dialog: Redux.dialogPage.di
+//     dialog: state.dialogPage.di
 //   }
-//   Redux.dialogPage.messdata.push(newDi)
-//   rerenderIntireTree(Redux)
+//   state.dialogPage.messdata.push(newDi)
+//   rerenderIntireTree(state)
 // }
 
 // export const updateDi = (text) => {
-//   Redux.dialogPage.di = text
-//   rerenderIntireTree(Redux)
+//   state.dialogPage.di = text
+//   rerenderIntireTree(state)
 
 // }
 
 // export const updateNewText= (text) => {
-// Redux.profilePage.newText = text;
+// state.profilePage.newText = text;
 
-// rerenderIntireTree(Redux)
+// rerenderIntireTree(state)
 //  }
 
 
 //  export const subscribe = (observer) => {
 //    rerenderIntireTree = observer
 //  }
-//   export default Redux
+//   export default state

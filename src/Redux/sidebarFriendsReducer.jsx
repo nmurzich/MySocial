@@ -1,4 +1,4 @@
-let InitialRedux = {
+let InitialState = {
   friends: [
     { id: 1, name: 'Kolya', foto: 1, message: 1 },
     { id: 2, name: 'Rita', foto: 2, message: 555 },
@@ -12,21 +12,27 @@ let InitialRedux = {
   ]
 }
 
-const sidebarFriendsReducer = (Redux=InitialRedux, action) => {
+const sidebarFriendsReducer = (state=InitialState, action) => {
  switch (action.type) {
   case "ADD-FRIEND-MESSAGE":
     let newText = {
       id: 1,
       name: 'Kolya',
       foto: 1,
-      message: Redux.myfriendPost
+      message: state.myfriendPost
     }
-    Redux.friends.push(newText)
-  return Redux
+    
+  return {...state,
+    friends: [...state.friends, newText],
+    myfriendPost:""}
+
+  // state.friends.push(newText)
     case "MY-FRIEND-MESSAGE":
-    Redux.myfriendPost = action.body
-    return Redux
-    default: return Redux
+    
+    return {...state,
+    myfriendPost: action.body}
+
+    default: return state
   }
 }
   
