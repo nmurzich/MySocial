@@ -16,7 +16,7 @@ const usersPageReducer = (state = initialState, action) => {
         case 'FOLLOW':
             return {
                 ...state, users: state.users.map(u => {
-                    if (u.id === action.userId) { return { ...u, follow: true } }
+                    if (u.id === action.userId) { return { ...u, followed: true } }
                     return u
                 })
             }
@@ -25,11 +25,11 @@ const usersPageReducer = (state = initialState, action) => {
         case 'UNFOLLOW':
             return {
                 ...state, users: state.users.map(u => {
-                    if (u.id === action.userId) { return { ...u, follow: false } }
+                    if (u.id === action.userId) { return { ...u, followed: false } }
                     return u
                 })
             }
-        case 'SET-USERS': {
+        case 'SET_USERS': {
             return { ...state, users: [...state.users, ...action.users] }
         }
 
@@ -38,8 +38,8 @@ const usersPageReducer = (state = initialState, action) => {
 }
 
 
-    export const followAC = (userId) => ({ type: "FOLLOW", userId })
-    export const unfollowAC = (userId) => ({ type: "UNFOLLOW", userId })
-    export const setUsersAC = (users) => ({ type: "SET-USERS", users })
+    export const followedAC = (userId) => ({ type: "FOLLOW", userId })
+    export const unfollowedAC = (userId) => ({ type: "UNFOLLOW", userId })
+    export const setUsersAC = (users) => ({ type: "SET_USERS", users })
 
     export default usersPageReducer

@@ -10,8 +10,8 @@ import {Provider} from 'react-redux'
 
 
 
-let rerenderIntireTree = (state) =>
-{
+// let rerenderIntireTree = (state) =>
+// {
 ReactDOM.render(<BrowserRouter>
 <Provider store = {store}>
     <App 
@@ -33,11 +33,11 @@ ReactDOM.render(<BrowserRouter>
     />
     </Provider>
     </BrowserRouter>, document.getElementById('root'));
-}
-rerenderIntireTree (store.getState())
+// }
+// rerenderIntireTree (store.getState())
 
-rerenderIntireTree(store.getState());
-store.subscribe(rerenderIntireTree);
+// rerenderIntireTree(store.getState());
+// store.subscribe(rerenderIntireTree);
 
 // store.subscribe (() =>
 // {
