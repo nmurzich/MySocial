@@ -3,3 +3,8 @@
     height: 140px
 
 } 
+.activedPage {
+    color: white;
+    font-weight: bold
+
+}
