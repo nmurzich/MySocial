@@ -10,7 +10,8 @@ onames: [
   { id: 4, name: 'Mila' },
   { id: 5, name: 'Pasha' }
 ],
-newText: "128299"}
+newText: "128299",
+prolile: null}
 
 
 const profilePageReducer = (state = InitialState, action) => {
@@ -35,10 +36,20 @@ const profilePageReducer = (state = InitialState, action) => {
     // state.newText = action.body;
         return {...state, 
           newText: action.body}
+
+          case 'PHOTO_CLICK': {
+            return {...state, profile: action.profile}
+        }
 default: return state
 }
   }
   export default profilePageReducer
+
+  
+export const photoclickAC = (profile) => {
+  return {type: "PHOTO_CLICK", profile}
+}
+
 
   export const addPostActionCreator = () => {
     return { type: "ADD-POST" }
@@ -47,5 +58,7 @@ default: return state
   export const updateNewTextActionCreator = (text) => {
     return { type: "UPDATE-NEW-TEXT", body: text }
   }
+
+  
 
  

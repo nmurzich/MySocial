@@ -1,32 +1,44 @@
 import {connect} from 'react-redux'
 import React from 'react'
 import {followedAC, unfollowedAC} from '../../../Redux/usersPageReducer'
-import {setUsersAC, setPageSizeAC, setCurrentPageAC} from '../../../Redux/usersPageReducer'
+import {setUsersAC, setPageSizeAC, FetchingAC, setCurrentPageAC} from '../../../Redux/usersPageReducer'
 import ClearUsers from './ClearUsers'
 import * as axios from 'axios'
+import PreloaderMe from './PreloaderMe'
 
 class Users extends React.Component {
     //    
     componentDidMount() {
+        this.props.isFetchingMe(true)
                 axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
                                 .then(response => { 
+                                    this.props.isFetchingMe(false)
+                                    // используем isFetchingMe - f из MapDispatchToState
                                     this.props.setUsers(response.data.items)
                                 this.props.pageSizen(response.data.totalCount) })
+                                
     }
+    
 
 
-
-    onNumberClick = (pageNumber) => {this.props.setcurrentPage(pageNumber)       
+    onNumberClick = (pageNumber) => {this.props.setcurrentPage(pageNumber)  
+        this.props.isFetchingMe(true)     
 
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
 
             .then(response => {
+                this.props.isFetchingMe(false)
                 this.props.setUsers(response.data.items);
                         });
+                        
     }
     
        render() {
-           return <ClearUsers
+           
+           return <>
+                     {this.props.isFetching ? < PreloaderMe />: null}
+              
+           <ClearUsers
 
            totalUsersCount = {this.props.totalUsersCount}
            pageSize = {this.props.pageSize}
@@ -37,7 +49,9 @@ class Users extends React.Component {
            followed = {this.props.followed}          
            
            />}
+         </> 
        }
+    }
 
         // props.setUsers([
         //         { id: "1", name: 'Pasha', status: "ky-ky", follow: "true", region: { country: 'Belarus', city: 'Minsk' }, photo: "https://www.1zoom.me/big2/262/261162-Sepik.jpg" },
@@ -47,27 +61,36 @@ class Users extends React.Component {
         // }
         
 
-
-
-
 let MapPropsToState = (state) => {
     return {users: state.usersPage.users,
     pageSize: state.usersPage.pageSize,
     totalUsersCount: state.usersPage.totalUsersCount,
-    currentPage: state.usersPage.currentPage
+    currentPage: state.usersPage.currentPage,
+    isFetching: state.usersPage.isFetching
 }
 }
 
-let MapDispatchToState = (dispatch) => {
-    return {
-    followed: (userId) => {dispatch(followedAC(userId))},
-    unfollowed: (userId) => {dispatch(unfollowedAC(userId))},
-    setUsers: (users) => {dispatch(setUsersAC(users))},
-    pageSizen: (totalCount) => {dispatch(setPageSizeAC(totalCount))},
-    setcurrentPage: (pageNumber) => {dispatch(setCurrentPageAC(pageNumber))}
+// let MapDispatchToState = (dispatch) => {
+//     return {
+//     followed: (userId) => {dispatch(followedAC(userId))},
+//     unfollowed: (userId) => {dispatch(unfollowedAC(userId))},
+//     setUsers: (users) => {dispatch(setUsersAC(users))},
+//     pageSizen: (totalCount) => {dispatch(setPageSizeAC(totalCount))},
+//     setcurrentPage: (pageNumber) => {dispatch(setCurrentPageAC(pageNumber))},
+//     isFetchingMe: (isFetching) => {dispatch(FetchingAC(isFetching))}
+//     }
 
 
-}}
+// }
 
-const UsersContainer = connect (MapPropsToState, MapDispatchToState)(Users)
+const UsersContainer = connect (MapPropsToState, {
+    followed:followedAC,
+    unfollowed:unfollowedAC,
+    setUsers:setUsersAC,
+    pageSizen:setPageSizeAC,
+    setcurrentPage:setCurrentPageAC,
+    isFetchingMe:FetchingAC
+})(Users)
+
+// followed:followedAC можно сократить до followed, если совпадают (followed:followed)
 export default UsersContainer

@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import Header from './components/Header/Header';
 import Sidebar from './components/Sidebar/Sidebar';
-import Content from './components/Content/Content';
+import ProfileInfoContainer from './components/Content/ProfileInfo/ProfileInfoContainer'
 import Dialogs from './components/Sidebar/Dialogs/Dialogs';
 import {BrowserRouter, Route} from "react-router-dom"
 import Music from './components/Sidebar/Music/Music'
@@ -43,8 +43,7 @@ const App = () => {
       //  messdata={store._Redux.dialogPage.messdata} onames={store._Redux.profilePage.onames} 
       //   di={store._Redux.dialogPage.di}
         />}/>
-        <Route path = '/Profile' render = {() => <Content 
-        // store={store}
+        <Route path = '/Profile' render = {() => <ProfileInfoContainer        // store={store}
 
     //  onames={store._Redux.profilePage.onames} messages = {store._Redux.profilePage.messages} 
     //    newText= {store._Redux.profilePage.newText}

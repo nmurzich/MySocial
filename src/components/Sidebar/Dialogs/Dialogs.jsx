@@ -2,8 +2,6 @@ import React from 'react';
 import Dialog from './Dialogs.module.css'
 import { NavLink } from "react-router-dom"
 
-debugger
-
 const Dialogs = (props) => {
 
     let SendersName = props.dialogPage.onames.map(n => <Senders name={n.name} id={n.id} />)

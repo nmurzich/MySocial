@@ -1,0 +1,22 @@
+.content {
+
+    grid-area: content;
+     background-color: blue;
+   }
+  
+    .content img {
+      width: 400px;
+    }
+    
+    .item {color: blueviolet}
+    
+    .active {
+      color: chocolate;
+    }
+    .button {
+      color:  red;
+    }
+    .textarea {
+      color: blue
+    }
+  

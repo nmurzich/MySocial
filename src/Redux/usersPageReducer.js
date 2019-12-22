@@ -9,7 +9,8 @@ let initialState = {
     ],
     pageSize: 56,
     totalUsersCount: 2,
-    currentPage: 1
+    currentPage: 1,
+    
     
     // currentPageзапросили с сервака
 
@@ -45,6 +46,11 @@ const usersPageReducer = (state = initialState, action) => {
             return {...state, currentPage: action.currentPage}
         } 
 
+        case 'IS_FETCHING': {
+            return {...state, isFetching: action.isFetching}
+        }
+
+        
         default: return state
     }
 }
@@ -55,5 +61,7 @@ const usersPageReducer = (state = initialState, action) => {
     export const setUsersAC = (users) => ({ type: "SET_USERS", users })
     export const setPageSizeAC = (totalUsersCount) => ({type: "PAGE_SIZE", totalUsersCount})
     export const setCurrentPageAC = (currentPage) => ({type: "CURRENT_PAGE", currentPage})
+    export const FetchingAC = (isFetching) => ({type: "IS_FETCHING", isFetching})
+    
 
     export default usersPageReducer
