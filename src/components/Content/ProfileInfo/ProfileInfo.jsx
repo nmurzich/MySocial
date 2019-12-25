@@ -18,6 +18,14 @@ const ProfileInfo = (props) => {
 <div> ava + description</div> 
         {/* <NavLink to = '/profile + {u.id}'> */}
             <img src = {props.profile.photos.large}/>
+            <div>Про меня {props.profile.aboutMe}</div>
+            <div>Контакты {props.profile.contacts.facebook} {props.profile.contacts.website} {props.profile.contacts.twitter}
+            {props.profile.contacts.instagram} {props.profile.contacts.youtube} {props.profile.contacts.github}
+            {props.profile.contacts.mainLink}
+            </div>
+            <div>Работа {props.profile.lookingForAJob ? 'Working now!' : 'Голодный до работы'}</div>
+            <div>{props.profile.lookingForAJobDescription} </div>
+            <div>{props.profile.fullName}</div>
             {/* </NavLink> */}
 
 

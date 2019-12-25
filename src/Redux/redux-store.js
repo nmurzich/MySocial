@@ -3,6 +3,7 @@ import profilePageReducer from './profilePageReducer'
 import dialogPageReducer from './dialogPageReducer'
 import sidebarFriendsReducer from './sidebarFriendsReducer'
 import usersPageReducer from './usersPageReducer'
+import authReducer from '../components/Header/AuthReducer'
 
 let reducers = combineReducers(
     {profilePage: profilePageReducer,
@@ -10,6 +11,8 @@ let reducers = combineReducers(
     friendsPage: sidebarFriendsReducer,
     usersPage: usersPageReducer,
     isFetching: false,
+    autorization: authReducer
+    
           })
 
 let store = createStore(reducers)

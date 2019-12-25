@@ -11,7 +11,8 @@ onames: [
   { id: 5, name: 'Pasha' }
 ],
 newText: "128299",
-prolile: null}
+prolile: null,
+aboutMe: null}
 
 
 const profilePageReducer = (state = InitialState, action) => {
@@ -40,6 +41,22 @@ const profilePageReducer = (state = InitialState, action) => {
           case 'PHOTO_CLICK': {
             return {...state, profile: action.profile}
         }
+        case "ABOUT-ME-AC": {
+          return {...state, aboutMe: action.aboutMe}
+        }
+
+      case "CONTACTS-AC": {
+        return {...state, contacts: [...state.contacts]}
+      }
+      case "LOOKING-FOR-A-JOB": {
+        return {...state, lookingForAJob: action.lookingForAJob}
+      }
+      case "LOOKING-FOR-A-JOB-DESCRIPTION": {
+        return {...state, lookingForAJobDescription: action.lookingForAJobDescription}
+      }
+      case "FULL-NAME-AC": {
+        return {...state, fullName: action.fullName}
+      }
 default: return state
 }
   }
@@ -58,6 +75,27 @@ export const photoclickAC = (profile) => {
   export const updateNewTextActionCreator = (text) => {
     return { type: "UPDATE-NEW-TEXT", body: text }
   }
+
+  export const aboutMeAC = (aboutMe) => {
+    return {type: "ABOUT-ME-AC", aboutMe}
+  }
+
+export const contactsAC = (contacts) => {
+  return {type: "CONTACTS-AC", contacts}
+}
+
+export const lookingForAJobAC = (lookingForAJob) => {
+return {type: "LOOKING-FOR-A-JOB", lookingForAJob}
+}
+
+export const lookingForAJobDescription = (lookingForAJobDescription) => {
+  return {type: "LOOKING-FOR-A-JOB-DESCRIPTION", lookingForAJobDescription}
+
+}
+
+export const fullNameAC = (fullName) => {
+  return {type: "FULL-NAME-AC", fullName}
+}
 
   
 

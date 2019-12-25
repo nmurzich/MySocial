@@ -2,6 +2,7 @@ import React from 'react'
 import styles from './users.module.css';
 import { NavLink } from "react-router-dom"
 import userPhoto from '../../../assets/images/userPhoto.jpg'
+import *as axios from 'axios'
 
 
 const ClearUsers = (props) => {
@@ -16,15 +17,28 @@ const ClearUsers = (props) => {
             // {(e) => {onNumberClick(p)}}
             >{p}</div>})} 
                                    
-            {/* // <button onClick = {getUsers}>Дай юзеров</button> */}
+           {/* <button onClick = {getUsers}>Дай юзеров</button>  */}
             {props.users.map(u => <div key={u.id}>
 
                
                 <div>{u.status} </div>
                 <div> </div>
                     <span>
-                    {u.followed ? <button onClick={() => { props.unfollowed(u.id) }}>UnFollow</button>
-                    : <button onClick={() => { props.followed(u.id) }}>Follow</button>}</span>
+                        
+                    {u.followed ?  <button onClick={() => { axios.delete(`https://social-network.samuraijs.com/follow/${u.id}`,
+                    {withCredentials: true,
+                    headers:  {"API-KEY": "7d08c86e-266b-427c-8e89-df3dc187da0e"}})
+                                        .then(response => {if (response.data.resultCode == 1) props.unfollowed(u.id) })}}>UnFollow</button>
+                    
+                   
+                    /* {u.followed ? <button onClick={() => { props.unfollowed(u.id) }}>UnFollow</button> */
+                    :<button onClick={() => { axios.post(`https://social-network.samuraijs.com/follow/${u.id}`, {}, 
+                    {withCredentials: true,
+                        headers: {"API-KEY": "7d08c86e-266b-427c-8e89-df3dc187da0e"}
+                    }) 
+                    .then(response => {if(response.data.resultCode == 0) {props.followed(u.id)}})}}>Follow</button>}</span>
+
+                    {/* // : <button onClick={() => { props.followed(u.id) }}>Follow</button>}</span> */}
  <div>{u.id} </div> 
  <div>{u.name} </div>
  {"u.region.country"}

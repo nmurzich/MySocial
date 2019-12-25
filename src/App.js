@@ -16,6 +16,7 @@ import PostContainer from './components/Content/PostContainer'
 import SidebarFriendsContainer from './components/Sidebar/SidebarFriendsContainer'
 import FriendsOnlineContainer from './components/Sidebar/FriendsOnlineContainer'
 import UsersContainer from './components/Sidebar/Dialogs/UsersContainer'
+import HeaderContainer from './components/Header/HeaderContainer'
 
 
 
@@ -26,7 +27,7 @@ const App = () => {
 
     
     <div className="grid">
-         <Header/>
+         <HeaderContainer/>
          <Sidebar/>
          <SidebarFriendsContainer 
         //  store={props.store}
@@ -43,7 +44,7 @@ const App = () => {
       //  messdata={store._Redux.dialogPage.messdata} onames={store._Redux.profilePage.onames} 
       //   di={store._Redux.dialogPage.di}
         />}/>
-        <Route path = '/Profile' render = {() => <ProfileInfoContainer        // store={store}
+        <Route path = '/Profile/:userId?' render = {() => <ProfileInfoContainer        // store={store}
 
     //  onames={store._Redux.profilePage.onames} messages = {store._Redux.profilePage.messages} 
     //    newText= {store._Redux.profilePage.newText}
