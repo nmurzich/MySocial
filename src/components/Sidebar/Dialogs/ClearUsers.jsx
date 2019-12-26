@@ -25,14 +25,17 @@ const ClearUsers = (props) => {
                 <div> </div>
                     <span>
                         
-                    {u.followed ?  <button onClick={() => { axios.delete(`https://social-network.samuraijs.com/follow/${u.id}`,
+                    {u.followed ?  <button onClick={() => { 
+                        axios.delete(`https://social-network.samuraijs.com/follow/${u.id}`,
                     {withCredentials: true,
                     headers:  {"API-KEY": "7d08c86e-266b-427c-8e89-df3dc187da0e"}})
                                         .then(response => {if (response.data.resultCode == 1) props.unfollowed(u.id) })}}>UnFollow</button>
                     
                    
                     /* {u.followed ? <button onClick={() => { props.unfollowed(u.id) }}>UnFollow</button> */
-                    :<button onClick={() => { axios.post(`https://social-network.samuraijs.com/follow/${u.id}`, {}, 
+                    :<button onClick={() => { 
+                        
+                    axios.post(`https://social-network.samuraijs.com/follow/${u.id}`, {}, 
                     {withCredentials: true,
                         headers: {"API-KEY": "7d08c86e-266b-427c-8e89-df3dc187da0e"}
                     }) 

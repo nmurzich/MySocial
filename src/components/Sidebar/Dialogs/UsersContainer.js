@@ -5,18 +5,20 @@ import {setUsersAC, setPageSizeAC, FetchingAC, setCurrentPageAC} from '../../../
 import ClearUsers from './ClearUsers'
 import * as axios from 'axios'
 import PreloaderMe from './PreloaderMe'
+import { usersAPI } from '../../../api/api'
 
 class Users extends React.Component {
     //    
     componentDidMount() {
         this.props.isFetchingMe(true)
-                axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,
-    {withCredentials: true})
-                                .then(response => { 
+        usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
+    //             axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,
+    // {withCredentials: true})
+                                .then(data => { 
                                     this.props.isFetchingMe(false)
                                     // используем isFetchingMe - f из MapDispatchToState
-                                    this.props.setUsers(response.data.items)
-                                this.props.pageSizen(response.data.totalCount) })
+                                    this.props.setUsers(data.items)
+                                this.props.pageSizen(data.totalCount) })
                                 
     }
     
@@ -24,12 +26,12 @@ class Users extends React.Component {
 
     onNumberClick = (pageNumber) => {this.props.setcurrentPage(pageNumber)  
         this.props.isFetchingMe(true)     
+        usersAPI.getPageNumber(pageNumber, this.props.pageSize)
+        // axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, {withCredentials: true})
 
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, {withCredentials: true})
-
-            .then(response => {
+            .then(data => {
                 this.props.isFetchingMe(false)
-                this.props.setUsers(response.data.items);
+                this.props.setUsers(data.items);
                         });
                         
     }
