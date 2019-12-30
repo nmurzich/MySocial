@@ -1,3 +1,4 @@
+import {usersAPI} from '../../api/api'
 
 let InitialState = 
 {id: null, 
@@ -19,7 +20,20 @@ const authReducer = (state = InitialState, action) => {
 }
 }
 
-export const authReducerAC = (id, email, login) => ({type: "AUTH-REDUCER-AC", data: {id, email, login} })
+export const authReducerAC = (id, email, login) => ({type: "AUTH-REDUCER-AC", data: {id, email, login}})
 
+
+// export const authReducerThunk = () => (dispatch) => {
+    
+//     // return (dispatch) => {    
+//     // dispatch(authReducerAC(true))
+//     usersAPI.getAuthMe()
+//     .then(response => {
+//         if (response.data.resultCode === 0) {            
+//         let {id, email, login} = response.data.data;
+//          authReducerAC(id, email, login)}})
+//         }
+             
+        
 
 export default authReducer

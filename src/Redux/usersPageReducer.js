@@ -1,4 +1,6 @@
 import React from 'react'
+import { usersAPI } from '../api/api'
+
 
 
 let initialState = {
@@ -10,11 +12,16 @@ let initialState = {
     pageSize: 56,
     totalUsersCount: 2,
     currentPage: 1,
+    isFetching: true,
+    isFetchingButton: []
+    
+    
     
     
     // currentPageзапросили с сервака
 
 }
+
 
 const usersPageReducer = (state = initialState, action) => {
 
@@ -50,7 +57,14 @@ const usersPageReducer = (state = initialState, action) => {
             return {...state, isFetching: action.isFetching}
         }
 
-        
+        case 'IS_DISABLING': {
+            return {...state,
+                isFetchingButton: action.disableButton
+                  ? [...state.isFetchingButton, action.userId]
+                  : state.isFetchingButton.filter(id => id !== action.userId)
+    }
+
+}
         default: return state
     }
 }
@@ -62,6 +76,15 @@ const usersPageReducer = (state = initialState, action) => {
     export const setPageSizeAC = (totalUsersCount) => ({type: "PAGE_SIZE", totalUsersCount})
     export const setCurrentPageAC = (currentPage) => ({type: "CURRENT_PAGE", currentPage})
     export const FetchingAC = (isFetching) => ({type: "IS_FETCHING", isFetching})
+    export const followinInProgressAC = (disableButton, userId) => ({type: "IS_DISABLING", disableButton, userId})
     
 
     export default usersPageReducer
+
+    // export const UsersFollowThunk = (userId) => (dispatch) => {
+    //     dispatch(FollowinInProgressAC(true, userId))
+    //     usersAPI.getUnFollow()
+    //     .then(response => {if(response.data.resultCode == 0) {followedAC(userId)}})
+    //     dispatch(FollowinInProgressAC(false, userId))
+
+    // }

@@ -8,13 +8,15 @@ import {photoclickAC} from '../../../Redux/profilePageReducer'
 import UserProfile from '../ProfileInfo/UserProfile'
 import {withRouter} from 'react-router-dom'
 import {getProfileInfoContainer} from '../../../api/api'
-
+import {usersAPI} from '../../../api/api'
 
 class ProfileInfoContainer extends React.Component {
 
     componentDidMount() {
     let userId = this.props.match.params.userId
     if (!userId) {userId=2}
+
+    // usersAPI.getProfileInfoContainer(userId)
     // getProfileInfoContainer(userId) не работает с userId (файл api)
     axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId, {withCredentials: true})
         .then(data => {this.props.photoclick(data.data)})}

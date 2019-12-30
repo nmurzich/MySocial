@@ -1,37 +1,42 @@
 import {connect} from 'react-redux'
 import React from 'react'
 import {followedAC, unfollowedAC} from '../../../Redux/usersPageReducer'
-import {setUsersAC, setPageSizeAC, FetchingAC, setCurrentPageAC} from '../../../Redux/usersPageReducer'
+import { setUsersAC, setPageSizeAC, FetchingAC, setCurrentPageAC, followinInProgressAC } from '../../../Redux/usersPageReducer'
 import ClearUsers from './ClearUsers'
 import * as axios from 'axios'
 import PreloaderMe from './PreloaderMe'
 import { usersAPI } from '../../../api/api'
 
+
 class Users extends React.Component {
     //    
     componentDidMount() {
         this.props.isFetchingMe(true)
-        usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
-    //             axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,
-    // {withCredentials: true})
-                                .then(data => { 
+        
+        // usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
+                axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,
+    {withCredentials: true})
+                                .then(response=> { 
                                     this.props.isFetchingMe(false)
                                     // используем isFetchingMe - f из MapDispatchToState
-                                    this.props.setUsers(data.items)
-                                this.props.pageSizen(data.totalCount) })
+                                    this.props.setUsers(response.data.items)
+                                this.props.pageSizen(response.data.totalCount) })
                                 
     }
+
+    
     
 
 
     onNumberClick = (pageNumber) => {this.props.setcurrentPage(pageNumber)  
         this.props.isFetchingMe(true)     
-        usersAPI.getPageNumber(pageNumber, this.props.pageSize)
-        // axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, {withCredentials: true})
+        // usersAPI.getPageNumber(pageNumber, this.props.pageSize)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, 
+        {withCredentials: true})
 
-            .then(data => {
+            .then(response => {
                 this.props.isFetchingMe(false)
-                this.props.setUsers(data.items);
+                this.props.setUsers(response.data.items);
                         });
                         
     }
@@ -49,13 +54,14 @@ class Users extends React.Component {
            onNumberClick = {this.onNumberClick}
            users = {this.props.users}
            unfollowed = {this.props.unfollowed}
-           followed = {this.props.followed}          
+           followed = {this.props.followed} 
+           isFetchingButton = {this.props.isFetchingButton}
+           disablingNow = {this.props.disablingNow}
            
            />}
          </> 
        }
     }
-
         // props.setUsers([
         //         { id: "1", name: 'Pasha', status: "ky-ky", follow: "true", region: { country: 'Belarus', city: 'Minsk' }, photo: "https://www.1zoom.me/big2/262/261162-Sepik.jpg" },
         //         { id: "2", name: 'Tanya', status: "Yoyoyoy", follow: "false", region: { country: 'Russia', city: 'Moscow' }, photo: "https://mirzhivotnye.ru/wp-content/uploads/2018/08/Suslik-68-768x813.jpg" },
@@ -65,14 +71,16 @@ class Users extends React.Component {
         
 
 let MapPropsToState = (state) => {
-    return {users: state.usersPage.users,
+    return {
+        users: state.usersPage.users,
     pageSize: state.usersPage.pageSize,
     totalUsersCount: state.usersPage.totalUsersCount,
     currentPage: state.usersPage.currentPage,
-    isFetching: state.usersPage.isFetching
-}
-}
+    isFetching: state.usersPage.isFetching,
+    // disableButton: state.usersPage.isFetchingOnDisableButton,
+     isFetchingButton: state.usersPage.isFetchingButton}}
 
+    
 // let MapDispatchToState = (dispatch) => {
 //     return {
 //     followed: (userId) => {dispatch(followedAC(userId))},
@@ -86,14 +94,14 @@ let MapPropsToState = (state) => {
 
 // }
 
-const UsersContainer = connect (MapPropsToState, {
+export default connect (MapPropsToState, {
     followed:followedAC,
     unfollowed:unfollowedAC,
     setUsers:setUsersAC,
     pageSizen:setPageSizeAC,
     setcurrentPage:setCurrentPageAC,
-    isFetchingMe:FetchingAC
+    isFetchingMe: FetchingAC,
+    disablingNow: followinInProgressAC
 })(Users)
 
 // followed:followedAC можно сократить до followed, если совпадают (followed:followed)
-export default UsersContainer
