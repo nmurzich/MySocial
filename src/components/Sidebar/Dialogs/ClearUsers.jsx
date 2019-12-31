@@ -8,8 +8,6 @@ import {UsersFollowThunk} from '../../../Redux/usersPageReducer'
 
 
 
-debugger
-
 
 const ClearUsers = (props) => {
         let pageCount = Math.ceil(props.totalUsersCount / props.pageSize)
@@ -37,18 +35,18 @@ const ClearUsers = (props) => {
                                     }
 
                      onClick={() => { 
-                       
-                        props.disablingNow(true, u.id)
-                        // usersAPI.getUnFollow()
+                        props.UsersUnFollowThunk(u.id)}}
+                        // props.disablingNow(true, u.id)
+                        // usersAPI.getUnFollow(u.id)
                         // .then(response => {if (response.data.resultCode == 1) props.unfollowed(u.id) })
                         
-                        axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
-                    {withCredentials: true,
-                    headers:  {"API-KEY": "7d08c86e-266b-427c-8e89-df3dc187da0e"}})
-                                        .then(response => {if (response.data.resultCode == 0) {props.unfollowed(u.id) }
+                    //     axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
+                    // {withCredentials: true,
+                    // headers:  {"API-KEY": "7d08c86e-266b-427c-8e89-df3dc187da0e"}})
+                    //                     .then(response => {if (response.data.resultCode == 0) {props.unfollowed(u.id) }
                     
-                    props.disablingNow(false, u.id)})}
-                     }
+                    // props.disablingNow(false, u.id)}}
+                     
                     
                 //    {u.followed ? <button onClick={() => { props.unfollowed(u.id) }}
                 >UnFollow</button>
@@ -58,17 +56,19 @@ const ClearUsers = (props) => {
                      
                         
                         onClick={() => { 
-                        
-                        props.disablingNow(true, u.id)
-                        // UsersFollowThunk()}}
-                        // usersAPI.getFollow()
-                        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, 
-                   {withCredentials: true, 
-                    header: {"API-KEY": "7d08c86e-266b-427c-8e89-df3dc187da0e"}
-                   }) 
-                    .then(response => {if (response.data.resultCode == 0) {props.followed(u.id)} 
-                        props.disablingNow(false, u.id)})}}
-                        
+                            
+                        props.FollowedThunk(u.id)
+                            // followinInProgressThunkCreator()}}
+                        // props.disablingNow(true, u.id)
+                        // // UsersFollowThunk()}}
+                        // usersAPI.getFollow(u.id)
+                //         axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, 
+                //    {withCredentials: true, 
+                //     header: {"API-KEY": "7d08c86e-266b-427c-8e89-df3dc187da0e"}
+                //    }) 
+                    // .then(response => {if (response.data.resultCode == 0) {props.followed(u.id)} 
+                    //     props.disablingNow(false, u.id)})}}
+                        }}
                         >Follow</button>}
                         </span>
                         

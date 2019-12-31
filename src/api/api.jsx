@@ -9,34 +9,32 @@ let instance = axios.create(
 )
 
 export const usersAPI = {
-// getUsers (currentPage=1, pageSize=10) {
-//     return instance.get(`users?page=${currentPage}&count=${pageSize}`)
+getUsers (currentPage, pageSize) {
+    return instance.get(`users?page=${currentPage}&count=${pageSize}`)},
 //        .then(response => {return response.data})
 //     },
-// getPageNumber (pageNumber, pageSize) {
-//     return  instance.get(`users?page=${pageNumber}&count=${pageSize}`)
+getPageNumber (pageNumber, pageSize) {
+    return  instance.get(`users?page=${pageNumber}&count=${pageSize}`)},
 //        .then(response => {return response.data})
 // },
 getAuthMe () {
     return instance.get(`auth/me`)
-    .then(response => {return response.data})
-}}
+    // .then(response => {return response.data})
+},
 // },
-// getProfileInfoContainer (userId) {
-//     return instance.get(`profile/` + userId)
+getProfileInfoContainer (userId) {
+    return instance.get(`profile/` + userId)},
 //     .then(response => {return response.data})},
 
-// getFollow (userId, followed) {
-//     return instance.post(`follow/${userId}`, {}, )
-//     .then(response => {if(response.data.resultCode == 0) {followed(userId)}}) 
+getFollow (userId) {
+    return instance.post(`follow/${userId}`, {}, )},
+    // .then(response => {if(response.data.resultCode == 0) {followed(userId)}})},
 
-// },
-
-// getUnFollow (userId, unfollowed) {
+getUnFollow (userId) {
+        return instance.delete(`follow/${userId}`)
     
-//     return instance.delete(`follow/${userId}`)
-    
-//                         .then(response => {if (response.data.resultCode == 1) unfollowed(userId) })
+                        // .then(response => {if (response.data.resultCode == 1) unfollowed(userId) })
+}}
 
 // }
 // }

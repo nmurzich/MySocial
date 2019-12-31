@@ -16,9 +16,9 @@ class ProfileInfoContainer extends React.Component {
     let userId = this.props.match.params.userId
     if (!userId) {userId=2}
 
-    // usersAPI.getProfileInfoContainer(userId)
+    usersAPI.getProfileInfoContainer(userId)
     // getProfileInfoContainer(userId) не работает с userId (файл api)
-    axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId, {withCredentials: true})
+    // axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId, {withCredentials: true})
         .then(data => {this.props.photoclick(data.data)})}
     
 

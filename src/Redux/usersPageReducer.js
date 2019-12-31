@@ -79,12 +79,30 @@ const usersPageReducer = (state = initialState, action) => {
     export const followinInProgressAC = (disableButton, userId) => ({type: "IS_DISABLING", disableButton, userId})
     
 
-    export default usersPageReducer
+export default usersPageReducer
 
-    // export const UsersFollowThunk = (userId) => (dispatch) => {
-    //     dispatch(FollowinInProgressAC(true, userId))
-    //     usersAPI.getUnFollow()
-    //     .then(response => {if(response.data.resultCode == 0) {followedAC(userId)}})
-    //     dispatch(FollowinInProgressAC(false, userId))
+// export const followinInProgressThunkCreator = (userId) => (dispatch) => {
+//     dispatch(followinInProgressAC(true, userId))
+//     usersAPI.getFollow()
+//     .then(response => {if (response.data.resultCode == 0) {followedAC(userId)} })
+//                         dispatch(followinInProgressAC(false, userId))}
+    
+    export const UsersUnFollowThunk = (userId) => {
+        return(dispatch) => {
+        dispatch(followinInProgressAC(true, userId))
+        usersAPI.getUnFollow(userId)
+        .then(response => {if(response.data.resultCode == 0) {dispatch(unfollowedAC(userId))}
+        dispatch(followinInProgressAC(false, userId))})}
+        }
 
-    // }
+export const FollowedThunk = (userId) => {
+        return(dispatch) => {
+            dispatch(followinInProgressAC(true, userId))
+            usersAPI.getFollow(userId)
+        .then(response => {if (response.data.resultCode == 0) {dispatch(followedAC(userId))} 
+                        dispatch(followinInProgressAC(false, userId))})}}
+
+
+
+
+        

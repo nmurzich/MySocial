@@ -6,6 +6,8 @@ import ClearUsers from './ClearUsers'
 import * as axios from 'axios'
 import PreloaderMe from './PreloaderMe'
 import { usersAPI } from '../../../api/api'
+import {UsersUnFollowThunk} from '../../../Redux/usersPageReducer'
+import {FollowedThunk} from '../../../Redux/usersPageReducer'
 
 
 class Users extends React.Component {
@@ -13,9 +15,9 @@ class Users extends React.Component {
     componentDidMount() {
         this.props.isFetchingMe(true)
         
-        // usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
-                axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,
-    {withCredentials: true})
+        usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
+    //             axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,
+    // {withCredentials: true})
                                 .then(response=> { 
                                     this.props.isFetchingMe(false)
                                     // используем isFetchingMe - f из MapDispatchToState
@@ -25,14 +27,11 @@ class Users extends React.Component {
     }
 
     
-    
-
-
     onNumberClick = (pageNumber) => {this.props.setcurrentPage(pageNumber)  
         this.props.isFetchingMe(true)     
-        // usersAPI.getPageNumber(pageNumber, this.props.pageSize)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, 
-        {withCredentials: true})
+        usersAPI.getPageNumber(pageNumber, this.props.pageSize)
+        // axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, 
+        // {withCredentials: true})
 
             .then(response => {
                 this.props.isFetchingMe(false)
@@ -57,7 +56,8 @@ class Users extends React.Component {
            followed = {this.props.followed} 
            isFetchingButton = {this.props.isFetchingButton}
            disablingNow = {this.props.disablingNow}
-           
+           UsersUnFollowThunk = {this.props.UsersUnFollowThunk}
+           FollowedThunk = {this.props.FollowedThunk}
            />}
          </> 
        }
@@ -101,7 +101,9 @@ export default connect (MapPropsToState, {
     pageSizen:setPageSizeAC,
     setcurrentPage:setCurrentPageAC,
     isFetchingMe: FetchingAC,
-    disablingNow: followinInProgressAC
+    disablingNow: followinInProgressAC,
+    UsersUnFollowThunk,
+    FollowedThunk
 })(Users)
 
 // followed:followedAC можно сократить до followed, если совпадают (followed:followed)
