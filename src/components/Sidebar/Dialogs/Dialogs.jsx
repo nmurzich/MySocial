@@ -1,6 +1,6 @@
 import React from 'react';
 import Dialog from './Dialogs.module.css'
-import { NavLink } from "react-router-dom"
+import { NavLink, Redirect } from "react-router-dom"
 
 const Dialogs = (props) => {
 
@@ -22,7 +22,7 @@ const Dialogs = (props) => {
     //     let action = updateDiActionCreator(body)
     //     props.dispatch(action)
     // }
-
+if (!props.IsAuth) return <Redirect to = "/login"/>
     return (
         <div className='grid'>
             <div>

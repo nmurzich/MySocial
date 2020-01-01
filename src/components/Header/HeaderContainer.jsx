@@ -4,24 +4,25 @@ import React from 'react';
 import {connect} from 'react-redux'
 import {authReducerAC} from './AuthReducer'
 import { usersAPI } from '../../api/api'
-import { authReducerThunk } from '../Header/AuthReducer'
+import { AuthReducerThunk } from '../Header/AuthReducer'
 
 
 
 class HeaderContainer extends React.Component {
     componentDidMount() {
+        this.props.AuthReducerThunk()
         // this.props.authReducerThunk()
                   
             // let {id, email, login} = response.data.data};
            
         
-        usersAPI.getAuthMe()
-        // axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {withCredentials: true})
-        .then(response => {
+        // usersAPI.getAuthMe()
+        // // axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {withCredentials: true})
+        // .then(response => {
 
-           if (response.data.resultCode === 0) {            
-           let {id, email, login} = response.data.data;
-            this.props.authReducerAC(id, email, login)}})
+        //    if (response.data.resultCode === 0) {            
+        //    let {id, email, login} = response.data.data;
+        //     this.props.authReducerAC(id, email, login)}})
         
                 
         }
@@ -36,12 +37,13 @@ return <Header {...this.props}/>
 let mapStateToProps = (state) => ({
     data: state.autorization.login,
     IsAuth: state.autorization.IsAuth
+    })
 
-})
+
 
 export default connect (mapStateToProps, 
     {
-        authReducerAC
-    // authReducerThunk
+        authReducerAC,
+        AuthReducerThunk
 })
     (HeaderContainer)

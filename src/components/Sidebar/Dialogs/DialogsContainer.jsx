@@ -29,7 +29,10 @@ import {connect} from 'react-redux'
 let makeStateToProps = (state) => {
     return {
     dialogPage: state.dialogPage,
-    di: state.dialogPage.di}
+    di: state.dialogPage.di,
+    IsAuth: state.autorization.IsAuth
+
+}
 }
 
 let makeStateToDispatch = (dispatch) => {

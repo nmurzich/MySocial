@@ -34,6 +34,16 @@ export const authReducerAC = (id, email, login) => ({type: "AUTH-REDUCER-AC", da
 //          authReducerAC(id, email, login)}})
 //         }
              
+export const AuthReducerThunk = () => {
+    return (dispatch) => {
+        usersAPI.getAuthMe()
+                .then(response => {
+           if (response.data.resultCode === 0) {            
+           let {id, email, login} = response.data.data;
+            dispatch(authReducerAC(id, email, login))}})
         
+
+    }
+}        
 
 export default authReducer

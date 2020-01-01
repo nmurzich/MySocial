@@ -81,12 +81,7 @@ const usersPageReducer = (state = initialState, action) => {
 
 export default usersPageReducer
 
-// export const followinInProgressThunkCreator = (userId) => (dispatch) => {
-//     dispatch(followinInProgressAC(true, userId))
-//     usersAPI.getFollow()
-//     .then(response => {if (response.data.resultCode == 0) {followedAC(userId)} })
-//                         dispatch(followinInProgressAC(false, userId))}
-    
+  
     export const UsersUnFollowThunk = (userId) => {
         return(dispatch) => {
         dispatch(followinInProgressAC(true, userId))
@@ -102,7 +97,48 @@ export const FollowedThunk = (userId) => {
         .then(response => {if (response.data.resultCode == 0) {dispatch(followedAC(userId))} 
                         dispatch(followinInProgressAC(false, userId))})}}
 
+export const getUsersThunkCreator = (currentPage, pageSize) => {
+    return(dispatch) => {
+        dispatch(FetchingAC(true))
+        usersAPI.getUsers(currentPage, pageSize)
+        .then(response=> { 
+            dispatch(FetchingAC(false))
+            dispatch(setUsersAC(response.data.items))
+        dispatch(setPageSizeAC(response.data.totalCount))})
 
-
+}
+}
+                 
+                    //     this.props.isFetchingMe(true)
+        
+                    //     usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
+                    // //             axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,
+                    // // {withCredentials: true})
+                    //                             .then(response=> { 
+                    //                                 this.props.isFetchingMe(false)
+                    //                                 // используем isFetchingMe - f из MapDispatchToState
+                    //                                 this.props.setUsers(response.data.items)
+                    //                             this.props.pageSizen(response.data.totalCount) })
+export const getPageNumberThunk = (pageNumber, pageSize) => {
+    return(dispatch) => {
+        dispatch(FetchingAC(true))
+        usersAPI.getPageNumber(pageNumber, pageSize)
+        .then(response => {
+            dispatch(FetchingAC(false))
+            dispatch (setUsersAC(response.data.items))})
+        }
+    }
 
         
+       
+        
+                    // onNumberClick = (pageNumber) => {this.props.setcurrentPage(pageNumber)  
+                    //     this.props.isFetchingMe(true)     
+                    //     usersAPI.getPageNumber(pageNumber, this.props.pageSize)
+                    //     // axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, 
+                    //     // {withCredentials: true})
+                
+                    //         .then(response => {
+                    //             this.props.isFetchingMe(false)
+                    //             this.props.setUsers(response.data.items);
+                    //                     })}

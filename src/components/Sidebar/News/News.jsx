@@ -1,12 +1,14 @@
 import React from 'react'
-
-// let a = (1,5 - 1)*2
-//     alert (a)
+import {Redirect} from 'react-router-dom'
 
 
 
-const News = () => {
+const News = (props) => {
+
+
+
     return (
+        
         <div>Neeeeeeews</div>
     
     )

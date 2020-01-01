@@ -1,3 +1,6 @@
+import { usersAPI } from '../api/api'
+
+
 let InitialState = {messages: [
   { id: 1, message: "Hi, kapytka!", liked: 2, ava: 'HA' },
   { id: 2, message: 'Nice to meet u', liked: 4444, ava: 'MA' },
@@ -97,6 +100,16 @@ export const fullNameAC = (fullName) => {
   return {type: "FULL-NAME-AC", fullName}
 }
 
-  
+
+export const getProfileThunk = (userId) => {
+  return (dispatch) => {
+        usersAPI.getProfileInfoContainer(userId)
+    .then(data => {dispatch(photoclickAC(data.data))})
+  }
+}
+
+
+
+
 
  

@@ -17,6 +17,7 @@ import SidebarFriendsContainer from './components/Sidebar/SidebarFriendsContaine
 import FriendsOnlineContainer from './components/Sidebar/FriendsOnlineContainer'
 import UsersContainer from './components/Sidebar/Dialogs/UsersContainer'
 import HeaderContainer from './components/Header/HeaderContainer'
+import Login from './login/login'
 
 
 
@@ -44,7 +45,8 @@ const App = () => {
       //  messdata={store._Redux.dialogPage.messdata} onames={store._Redux.profilePage.onames} 
       //   di={store._Redux.dialogPage.di}
         />}/>
-        <Route path = '/Profile/:userId?' render = {() => <ProfileInfoContainer        // store={store}
+        <Route path = '/Profile/:userId?'        
+         render = {() => <ProfileInfoContainer        // store={store}
 
     //  onames={store._Redux.profilePage.onames} messages = {store._Redux.profilePage.messages} 
     //    newText= {store._Redux.profilePage.newText}
@@ -57,7 +59,7 @@ const App = () => {
         <Route path = '/settings'render = {()=> <Settings/>}/>
         <Route path = '/news' render = {()=><News/>}/>
         <Route path = '/users' render = {()=><UsersContainer/>}/>
-        
+        <Route path = '/login' render = {()=><Login/>}/>
 
         
         

@@ -8,39 +8,43 @@ import PreloaderMe from './PreloaderMe'
 import { usersAPI } from '../../../api/api'
 import {UsersUnFollowThunk} from '../../../Redux/usersPageReducer'
 import {FollowedThunk} from '../../../Redux/usersPageReducer'
+import {getUsersThunkCreator} from '../../../Redux/usersPageReducer'
+import {getPageNumberThunk} from '../../../Redux/usersPageReducer'
+import {Redirect} from 'react-router-dom'
 
 
 class Users extends React.Component {
-    //    
+     
     componentDidMount() {
-        this.props.isFetchingMe(true)
+        this.props.getUsersThunkCreator(this.props.currentPage, this.props.pageSize)}
+    //     this.props.isFetchingMe(true)
         
-        usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
-    //             axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,
-    // {withCredentials: true})
-                                .then(response=> { 
-                                    this.props.isFetchingMe(false)
-                                    // используем isFetchingMe - f из MapDispatchToState
-                                    this.props.setUsers(response.data.items)
-                                this.props.pageSizen(response.data.totalCount) })
+    //     usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
+    // //             axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,
+    // // {withCredentials: true})
+    //                             .then(response=> { 
+    //                                 this.props.isFetchingMe(false)
+    //                                 // используем isFetchingMe - f из MapDispatchToState
+    //                                 this.props.setUsers(response.data.items)
+    //                             this.props.pageSizen(response.data.totalCount) })
                                 
-    }
-
+       
+    onNumberClick = (pageNumber) => {this.props.getUsersThunkCreator(pageNumber,  this.props.pageSize) }
     
-    onNumberClick = (pageNumber) => {this.props.setcurrentPage(pageNumber)  
-        this.props.isFetchingMe(true)     
-        usersAPI.getPageNumber(pageNumber, this.props.pageSize)
-        // axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, 
-        // {withCredentials: true})
 
-            .then(response => {
-                this.props.isFetchingMe(false)
-                this.props.setUsers(response.data.items);
-                        });
+    //     this.props.isFetchingMe(true)     
+    //     usersAPI.getPageNumber(pageNumber, this.props.pageSize)
+    //     // axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, 
+    //     // {withCredentials: true})
+
+    //         .then(response => {
+    //             this.props.isFetchingMe(false)
+    //             this.props.setUsers(response.data.items);
+    //                     });
                         
-    }
-    
+       
        render() {
+           if (!this.props.IsAuth) {return <Redirect to = '/login' />}
            
            return <>
                      {this.props.isFetching ? < PreloaderMe />: null}
@@ -58,10 +62,15 @@ class Users extends React.Component {
            disablingNow = {this.props.disablingNow}
            UsersUnFollowThunk = {this.props.UsersUnFollowThunk}
            FollowedThunk = {this.props.FollowedThunk}
+           IsAuth = {this.props.IsAuth}
+           getUsersThunkCreator = {this.props.getUsersThunkCreator}
            />}
          </> 
        }
     }
+    
+    
+    
         // props.setUsers([
         //         { id: "1", name: 'Pasha', status: "ky-ky", follow: "true", region: { country: 'Belarus', city: 'Minsk' }, photo: "https://www.1zoom.me/big2/262/261162-Sepik.jpg" },
         //         { id: "2", name: 'Tanya', status: "Yoyoyoy", follow: "false", region: { country: 'Russia', city: 'Moscow' }, photo: "https://mirzhivotnye.ru/wp-content/uploads/2018/08/Suslik-68-768x813.jpg" },
@@ -72,13 +81,14 @@ class Users extends React.Component {
 
 let MapPropsToState = (state) => {
     return {
-        users: state.usersPage.users,
+    users: state.usersPage.users,
     pageSize: state.usersPage.pageSize,
     totalUsersCount: state.usersPage.totalUsersCount,
     currentPage: state.usersPage.currentPage,
     isFetching: state.usersPage.isFetching,
     // disableButton: state.usersPage.isFetchingOnDisableButton,
-     isFetchingButton: state.usersPage.isFetchingButton}}
+     isFetchingButton: state.usersPage.isFetchingButton,
+     IsAuth: state.autorization.IsAuth}}
 
     
 // let MapDispatchToState = (dispatch) => {
@@ -103,7 +113,9 @@ export default connect (MapPropsToState, {
     isFetchingMe: FetchingAC,
     disablingNow: followinInProgressAC,
     UsersUnFollowThunk,
-    FollowedThunk
-})(Users)
+    FollowedThunk,
+    getUsersThunkCreator,
+    getPageNumberThunk
+    })(Users)
 
 // followed:followedAC можно сократить до followed, если совпадают (followed:followed)
