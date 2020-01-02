@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom"
 import PI from './ProfileInfo.module.css'
 import UserProfile from '../ProfileInfo/UserProfile'
 import ProfileInfoContainer from '../ProfileInfo/ProfileInfoContainer'
-
+import ProfileStatus from '../../Header/1234'
 import PostContainer from '../PostContainer'
 
 const ProfileInfo = (props) => {
@@ -15,7 +15,8 @@ const ProfileInfo = (props) => {
         <div>
         <div className = "content"> 
                        <img src = 'https://storge.pic2.me/upload/704/585847e883b48.jpg'/>
-<div> ava + description</div> 
+
+
         {/* <NavLink to = '/profile + {u.id}'> */}
             <img src = {props.profile.photos.large}/>
             <div>Про меня {props.profile.aboutMe}</div>
@@ -28,7 +29,7 @@ const ProfileInfo = (props) => {
             <div>{props.profile.fullName}</div>
             {/* </NavLink> */}
 
-
+            <div> <ProfileStatus status = {'Hi Im fine!'}/></div> 
 
                 {/* <div><PostContainer
                 // store={props.store}
@@ -46,6 +47,7 @@ const ProfileInfo = (props) => {
        {/* </div> */}
                 {/* */} 
                 </div>
+                
         </div>)
            
 }

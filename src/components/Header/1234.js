@@ -1,34 +1,99 @@
-class HeaderContainer extends React.Component {
+import React from 'react'
 
 
-    componentDidMount() {
-
-
-        axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
+class ProfileStatus extends React.Component {
 
 
 
-            withCredentials: true
+    state = {
 
 
 
-        })
+        editMode: false,
 
 
 
-            .then(response => {
+        title: 'Yo'
 
 
 
-                if (response.data.resultCode === 0) {
+    }
 
 
 
-                    let {id, login, email} = response.data.data;
 
 
 
-                    this.props.setAuthUserData(id, email, login);
+
+    activateEditMode() {
+
+
+
+        this.setState( {
+
+
+
+            editMode: true
+
+
+
+        } );
+
+
+
+    }
+
+
+
+    deactivateEditMode() {
+
+
+
+        this.setState( {
+
+
+
+            editMode: false
+
+
+
+        } );
+
+
+
+    }
+
+
+
+
+
+
+
+    render() {
+
+
+
+        return (
+
+
+
+            <div>
+
+
+
+                {!this.state.editMode &&
+
+
+
+                    <div>
+
+
+
+                        <span onDoubleClick={ this.activateEditMode.bind(this) }>{this.props.status}</span>
+
+
+
+                    </div>
 
 
 
@@ -36,9 +101,44 @@ class HeaderContainer extends React.Component {
 
 
 
-            });
+                {this.state.editMode &&
+
+
+
+                    <div>
+
+
+
+                        <input  autoFocus={true} onBlur={ this.deactivateEditMode.bind(this) } value={this.props.status}/>
+
+
+
+                    </div>
+
+
+
+                }
+
+
+
+            </div>
+
+
+
+        )
 
 
 
     }
+
+
+
 }
+
+
+
+
+
+
+
+export default ProfileStatus; 
