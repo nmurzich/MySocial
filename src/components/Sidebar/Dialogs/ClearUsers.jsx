@@ -8,12 +8,12 @@ import {UsersFollowThunk} from '../../../Redux/usersPageReducer'
 
 
 
-
 const ClearUsers = (props) => {
         let pageCount = Math.ceil(props.totalUsersCount / props.pageSize)
         
         let pages = [];
         for (let i = 1; i<= pageCount; i++) {pages.push(i)}
+        
         return <div>
                         {
             pages.map( p=>{

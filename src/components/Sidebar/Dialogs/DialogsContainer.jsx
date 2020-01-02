@@ -2,6 +2,9 @@ import React from 'react';
 import {addDialogActionCreator, updateDiActionCreator}  from '../../../Redux/dialogPageReducer'
 import Dialogs from '../Dialogs/Dialogs'
 import {connect} from 'react-redux'
+import {WithAuthRedirect} from '../../../HoC/withAuthRedirect'
+import {withRouter} from 'react-router-dom'
+import {compose} from 'redux'
 
 
 
@@ -43,6 +46,13 @@ addDialog: () => {dispatch(addDialogActionCreator())}
 
 }
 
+let AuthRedirect = WithAuthRedirect(Dialogs)
+let withRouterComponent = withRouter(AuthRedirect)
 
-const DialogsContainer = connect (makeStateToProps, makeStateToDispatch) (Dialogs)
-export default DialogsContainer
+compose (
+    connect (makeStateToProps, makeStateToDispatch),
+    WithAuthRedirect
+)(Dialogs)
+export default WithAuthRedirect(connect (makeStateToProps, makeStateToDispatch) (withRouterComponent))
+
+//реализация с собств. изменениями (нужно без let withRouterComponent = withRouter(AuthRedirect))

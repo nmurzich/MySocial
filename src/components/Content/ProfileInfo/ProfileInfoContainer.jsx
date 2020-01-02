@@ -11,6 +11,8 @@ import {getProfileInfoContainer} from '../../../api/api'
 import {usersAPI} from '../../../api/api'
 import {getProfileThunk} from '../../../Redux/profilePageReducer'
 import {Redirect} from 'react-router-dom'
+import {WithAuthRedirect} from '../../../HoC/withAuthRedirect'
+import {compose} from 'redux'
 
 
 
@@ -31,8 +33,9 @@ class ProfileInfoContainer extends React.Component {
     
     }
 render() {  
-        if (!this.props.IsAuth) return <Redirect to={"/login"}/>
-
+    // if (!this.props.IsAuth) return <Redirect to = "/login"/>
+      
+    
     
     return (<div>
         <UserProfile {...this.props} profile = {this.props.profile} aboutMe = {this.props.aboutMe} contacts = {this.props.contacts} 
@@ -46,7 +49,8 @@ render() {
 
 }
 
-debugger
+// let MapDispatchtoAuth = (state) => ({IsAuth: state.autorization.IsAuth})
+// let HocAuthConnect = connect(MapDispatchtoAuth)(HocAuthConnect)
 
 let MapDispatchtoProps = (state) => ({
     profile: state.profilePage.profile,
@@ -55,10 +59,15 @@ let MapDispatchtoProps = (state) => ({
     lookingForAJob: state.profilePage.lookingForAJob,
     lookingForAJobDescription: state.profilePage.lookingForAJobDescription,
     fullName: state.profilePage.fullName,
-    IsAuth: state.autorization.IsAuth
+    
 })
 
- 
+let HocRedirect = WithAuthRedirect(ProfileInfoContainer)
+let WithUrlDataContainerComponent = withRouter(HocRedirect);
+export default WithAuthRedirect(connect(MapDispatchtoProps, {getProfileThunk})(WithUrlDataContainerComponent))
 
-export default connect(MapDispatchtoProps, {getProfileThunk})(withRouter(ProfileInfoContainer))
-
+compose(
+    WithUrlDataContainerComponent,
+    connect(MapDispatchtoProps, {getProfileThunk}),
+    WithAuthRedirect 
+)(ProfileInfoContainer)

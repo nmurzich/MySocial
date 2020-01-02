@@ -11,6 +11,8 @@ import {FollowedThunk} from '../../../Redux/usersPageReducer'
 import {getUsersThunkCreator} from '../../../Redux/usersPageReducer'
 import {getPageNumberThunk} from '../../../Redux/usersPageReducer'
 import {Redirect} from 'react-router-dom'
+import {withRouter} from 'react-router-dom'
+
 
 
 class Users extends React.Component {
@@ -44,9 +46,9 @@ class Users extends React.Component {
                         
        
        render() {
-           if (!this.props.IsAuth) {return <Redirect to = '/login' />}
-           
-           return <>
+        // if (!this.props.IsAuth) return <Redirect to = "/login"/>
+      
+                 return <>
                      {this.props.isFetching ? < PreloaderMe />: null}
               
            <ClearUsers
@@ -87,8 +89,8 @@ let MapPropsToState = (state) => {
     currentPage: state.usersPage.currentPage,
     isFetching: state.usersPage.isFetching,
     // disableButton: state.usersPage.isFetchingOnDisableButton,
-     isFetchingButton: state.usersPage.isFetchingButton,
-     IsAuth: state.autorization.IsAuth}}
+    isFetchingButton: state.usersPage.isFetchingButton,
+    IsAuth: state.autorization.IsAuth}}
 
     
 // let MapDispatchToState = (dispatch) => {
