@@ -1,6 +1,7 @@
 import React from 'react';
 import Dialog from './Dialogs.module.css'
 import { NavLink, Redirect } from "react-router-dom"
+import  DialogsForm from '../Dialogs/DialogsForm'
 
 const Dialogs = (props) => {
 
@@ -31,11 +32,11 @@ if (!props.IsAuth) return <Redirect to = "/login"/>
             <div>
                 {MessName}
             </div>
-
             <div>
                 <textarea onChange={onChangeDialogs} value={props.di}></textarea>
                 <button onClick={addDialog}>Add text</button>
             </div>
+            <DialogsForm/>
         </div>)
 }
 

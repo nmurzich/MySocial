@@ -22,9 +22,6 @@ getAuthMe () {
     // .then(response => {return response.data})
 },
 // },
-getProfileInfoContainer (userId) {
-    return instance.get(`profile/` + userId)},
-//     .then(response => {return response.data})},
 
 getFollow (userId) {
     return instance.post(`follow/${userId}`, {}, )},
@@ -34,7 +31,31 @@ getUnFollow (userId) {
         return instance.delete(`follow/${userId}`)
     
                         // .then(response => {if (response.data.resultCode == 1) unfollowed(userId) })
-}}
+},
+
+getProfileInfoContainer (userId) {
+    console.warn('Obsolete method. Please profileAPI object.')
+    return instance.get(`profile/` + userId)}
+}
+
+export const profileAPI = {
+
+getProfileInfoContainer (userId) {
+            return instance.get(`profile/` + userId)},    
+
+getUserStatus(userId) {
+    return instance.get(`profile/status/` + userId)
+},
+
+updateMyStatus (status) {
+    return instance.put(`profile/status`, {status: status})}
+}
+
+
+
+
+
+
 
 // }
 // }

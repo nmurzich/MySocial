@@ -1,31 +1,89 @@
-import React from 'react'
+// import React from 'react'
 
 
 
-class ProfileStatus extends React.Component {
-    state = {
-    editMode: false,
-    text: 'Hi, guys'}
+// class ProfileStatus extends React.Component {
 
-activatedEditmode() {
-    this.setState ({editMode: true})
-    }
-deactivatedEditMode() {
-    this.setState ({editMode: false})
-    }
+//     state = {
 
-    render () {
-    return (
-    <div>
-{!this.state.editMode &&
-    <div OnDoubleClick = {this.activatedEditmode}> {this.props.status} </div>}
-{this.state.editMode &&
-   <input autoFocus = {true} onBlur = {this.deactivatedEditMode} 
-   value = {this.props.status}/> }
-    </div>
-    )
-}
-}
+//         editMode: true,
 
-export default ProfileStatus
+//         status: this.props.status
 
+//     }
+    
+
+
+//     activateEditMode = () => {
+
+//         this.setState( {
+
+//             editMode: true
+
+//         } );
+
+//     }
+
+//     deactivateEditMode() {
+
+//         this.setState( {
+
+//             editMode: false
+            
+
+//         } );
+
+//     this.props.updateUserStatusThunk(this.state.status)
+        
+//     }
+//     onStatusChange = (e) => {
+
+//         this.setState({
+
+//             status: e.currentTarget.value
+
+//         });
+
+//     }
+
+//   componentDidUpdate(prevProps, prevState) {
+//       if (prevProps.status !== this.props.status) {this.setState({status: this.props.status})
+//   }
+// }
+
+
+//     render() {
+
+//         return (
+
+//             <div>
+
+//                 {!this.state.editMode &&
+
+//                     <div>
+
+//                         <span onDoubleClick={ this.activateEditMode }>{this.props.status || "-------"}</span>
+
+//                     </div>
+
+//                 }
+
+//                 {this.state.editMode &&
+
+//                     <div>
+
+//                         <input onChange={this.onStatusChange} autoFocus={true} onBlur={ this.deactivateEditMode.bind(this) } value={this.state.status}/>
+
+//                     </div>
+
+//                 }
+
+//             </div>
+
+//         )
+
+//     }
+
+// }
+
+// export default ProfileStatus

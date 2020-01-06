@@ -1,4 +1,4 @@
-import { usersAPI } from '../api/api'
+import { usersAPI, profileAPI } from '../api/api'
 
 
 let InitialState = {messages: [
@@ -15,7 +15,8 @@ onames: [
 ],
 newText: "128299",
 prolile: null,
-aboutMe: null}
+aboutMe: null,
+status: "1234567890"}
 
 
 const profilePageReducer = (state = InitialState, action) => {
@@ -31,7 +32,6 @@ const profilePageReducer = (state = InitialState, action) => {
     messages: [...state.messages, newPost],
     newText:""
   }
-
    
 // state.messages.push(newPost)
       
@@ -59,6 +59,13 @@ const profilePageReducer = (state = InitialState, action) => {
       }
       case "FULL-NAME-AC": {
         return {...state, fullName: action.fullName}
+      }
+case "GET-USER-STATUS": {
+        return {...state, status: action.status}
+      // }
+      // case "UPDATE-USER-STATUS": {
+      //   return {...state, status: action.status}
+
       }
 default: return state
 }
@@ -100,13 +107,47 @@ export const fullNameAC = (fullName) => {
   return {type: "FULL-NAME-AC", fullName}
 }
 
+export const getUserStatusAC = (status) => ({type: "GET-USER-STATUS", status})
+
+
+// export const updateUserStatusAC = (status) => {return {type: "UPDATE-USER-STATUS", status: status}}
+
 
 export const getProfileThunk = (userId) => {
   return (dispatch) => {
         usersAPI.getProfileInfoContainer(userId)
-    .then(data => {dispatch(photoclickAC(data.data))})
-  }
-}
+    .then(data => {dispatch(photoclickAC(data.data))})}}
+
+
+
+export let getUserStatusThunk = (userId) => (dispatch) => {
+   profileAPI.getUserStatus(userId)
+  .then(response => {dispatch(getUserStatusAC(response.data))})
+      }
+
+export let updateUserStatusThunk = (status) => (dispatch) => {
+ profileAPI.updateMyStatus(status)
+  .then(response => {if (response.data.resultCode ===  0) {dispatch(getUserStatusAC(status))}
+})}
+
+// не работает getUserStatusThunk и updateUserStatusThunk (ошибка при чтении типа)
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+    
+
+  
 
 
 

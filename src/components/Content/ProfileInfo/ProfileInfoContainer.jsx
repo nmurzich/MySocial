@@ -13,6 +13,8 @@ import {getProfileThunk} from '../../../Redux/profilePageReducer'
 import {Redirect} from 'react-router-dom'
 import {WithAuthRedirect} from '../../../HoC/withAuthRedirect'
 import {compose} from 'redux'
+import getUserStatusThunk from '../../../Redux/profilePageReducer'
+import updateUserStatusThunk from '../../../Redux/profilePageReducer'
 
 
 
@@ -20,9 +22,12 @@ class ProfileInfoContainer extends React.Component {
 
     componentDidMount() {
         let userId = this.props.match.params.userId
-    if (!userId) {userId=2}
+            if (!userId) {userId=2}
     
-        this.props.getProfileThunk(userId)
+    this.props.getProfileThunk(userId)
+    // this.props.getUserStatusThunk(this.props.userId)
+   
+        
     // let userId = this.props.match.params.userId
     // if (!userId) {userId=2}
 
@@ -40,14 +45,17 @@ render() {
     return (<div>
         <UserProfile {...this.props} profile = {this.props.profile} aboutMe = {this.props.aboutMe} contacts = {this.props.contacts} 
         lookingForAJob = {this.props.lookingForAJob} lookingForAJobDescription = {this.props.lookingForAJobDescription}
-        fullName = {this.props.fullName}
+        fullName = {this.props.fullName} updateUserStatusThunk = {this.props.updateUserStatusThunk} status = {this.props.status}
+       
+        />
+        
+       
         
         />
 
 </div>
     )}
-
-}
+   }
 
 // let MapDispatchtoAuth = (state) => ({IsAuth: state.autorization.IsAuth})
 // let HocAuthConnect = connect(MapDispatchtoAuth)(HocAuthConnect)
@@ -59,15 +67,32 @@ let MapDispatchtoProps = (state) => ({
     lookingForAJob: state.profilePage.lookingForAJob,
     lookingForAJobDescription: state.profilePage.lookingForAJobDescription,
     fullName: state.profilePage.fullName,
-    
+    status: state.profilePage.status,
+        
 })
 
-let HocRedirect = WithAuthRedirect(ProfileInfoContainer)
-let WithUrlDataContainerComponent = withRouter(HocRedirect);
-export default WithAuthRedirect(connect(MapDispatchtoProps, {getProfileThunk})(WithUrlDataContainerComponent))
 
-compose(
-    WithUrlDataContainerComponent,
-    connect(MapDispatchtoProps, {getProfileThunk}),
-    WithAuthRedirect 
-)(ProfileInfoContainer)
+export default connect(MapDispatchtoProps, {    getProfileThunk, 
+    //  updateUserStatusThunk,
+    //  getUserStatusThunk,
+    })(withRouter
+     (ProfileInfoContainer))
+
+// let HocRedirect = WithAuthRedirect(ProfileInfoContainer)
+
+// let WithUrlDataContainerComponent = withRouter(HocRedirect);
+
+// WithAuthRedirect (connect(MapDispatchtoProps, {getProfileThunk, getUserStatusThunk, updateUserStatusThunk})(WithUrlDataContainerComponent))
+
+// export default ProfileInfoContainer
+
+// compose(
+
+//     WithUrlDataContainerComponent,
+
+//     connect(MapDispatchtoProps, {getProfileThunk, getUserStatusThunk, updateUserStatusThunk}),
+
+//     WithAuthRedirect 
+
+// )(ProfileInfoContainer)
+    

@@ -11,7 +11,9 @@ const UserProfile = (props) => {
            return (
 <div>
 <ProfileInfo profile={props.profile} aboutMe = {props.aboutMe} contacts={props.contacts} lookingForAJob = {props.lookingForAJob}
-lookingForAJobDescription = {props.lookingForAJobDescription} fullName = {props.fullName}/>
+lookingForAJobDescription = {props.lookingForAJobDescription} fullName = {props.fullName} status = {props.status}
+updateUserStatusThunk = {props.updateUserStatusThunk}
+/>
          <PostContainer/>  
             </div>
 
