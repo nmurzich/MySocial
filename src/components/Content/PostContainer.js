@@ -1,5 +1,5 @@
 import React from 'react'
-import {addPostActionCreator, updateNewTextActionCreator} from '../../Redux/profilePageReducer'
+import {addPostActionCreator} from '../../Redux/profilePageReducer'
 import Post from '../Content/Post'
 import {connect} from 'react-redux'
 
@@ -32,8 +32,8 @@ let makeToProps = (state) => {
 }
 let makeToDispatch = (dispatch) => {
   return {
-  addPost: () => {dispatch(addPostActionCreator())},
-  onPostChange: (text) => {dispatch(updateNewTextActionCreator(text))}
+  addPost: (formforposts) => {dispatch(addPostActionCreator(formforposts))},
+  // onPostChange: (text) => {dispatch(updateNewTextActionCreator(text))}
   }
 }
 

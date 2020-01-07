@@ -24,22 +24,21 @@ const profilePageReducer = (state = InitialState, action) => {
     case "ADD-POST": 
     let newPost = {
       id: 5,
-      message: state.newText,
+      message: action.formforposts,
       liked: 4,
       ava: 'MA'
     }     
    return {...state, 
     messages: [...state.messages, newPost],
-    newText:""
-  }
+      }
    
 // state.messages.push(newPost)
       
 
-  case "UPDATE-NEW-TEXT":
-    // state.newText = action.body;
-        return {...state, 
-          newText: action.body}
+  // case "UPDATE-NEW-TEXT":
+  //   // state.newText = action.body;
+  //       return {...state, 
+  //         newText: action.body}
 
           case 'PHOTO_CLICK': {
             return {...state, profile: action.profile}
@@ -78,13 +77,13 @@ export const photoclickAC = (profile) => {
 }
 
 
-  export const addPostActionCreator = () => {
-    return { type: "ADD-POST" }
+  export const addPostActionCreator = (formforposts) => {
+    return { type: "ADD-POST", formforposts }
   }
   
-  export const updateNewTextActionCreator = (text) => {
-    return { type: "UPDATE-NEW-TEXT", body: text }
-  }
+  // export const updateNewTextActionCreator = (text) => {
+  //   return { type: "UPDATE-NEW-TEXT", body: text }
+  // }
 
   export const aboutMeAC = (aboutMe) => {
     return {type: "ABOUT-ME-AC", aboutMe}

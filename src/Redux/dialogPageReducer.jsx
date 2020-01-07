@@ -20,28 +20,29 @@ const dialogPageReducer = (state=InitialState, action) => {
      case "ADD-DIALOG": {
         let newDi = {
           id: 1,
-          dialog: state.di
+          dialog: action.dialogsform
         }
         // state.messdata.push(newDi)
        return {...state,
         messdata: [...state.messdata, newDi],
-        di:""}
+        }
       }
   
       case "UPDATE-DI":
         
        return {...state,
-        di:action.newDialog}
+        di:action.dialogsform}
       //  state.di = action.newDialog;
-       default: return state
+       
+      default: return state
 }
 }
 
 export default dialogPageReducer
 
-export const addDialogActionCreator = () => {
-    return { type: "ADD-DIALOG" }
+export const addDialogActionCreator = (dialogsform) => {
+    return { type: "ADD-DIALOG", dialogsform }
   }
-  export const updateDiActionCreator = (body) => {
-    return {type: "UPDATE-DI", newDialog: body}
-  }
+  // export const updateDiActionCreator = (body) => {
+  //   return {type: "UPDATE-DI", newDialog: body}
+  // }

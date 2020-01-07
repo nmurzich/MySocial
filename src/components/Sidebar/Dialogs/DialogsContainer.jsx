@@ -40,8 +40,8 @@ let makeStateToProps = (state) => {
 
 let makeStateToDispatch = (dispatch) => {
     return {
-updateDi: (body) => {dispatch(updateDiActionCreator(body))},
-addDialog: () => {dispatch(addDialogActionCreator())}
+// updateDi: (body) => {dispatch(updateDiActionCreator(body))},
+addDialog: (dialogsform) => {dispatch(addDialogActionCreator(dialogsform))}
     }
 
 }

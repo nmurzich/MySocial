@@ -1,27 +1,34 @@
-import { Field, reduxForm } from 'redux-form'
-import React from 'react'
+// import { Field, reduxForm } from 'redux-form'
+// import React from 'react'
 // import {textareastyle} from "../Dialogs/DialogsFormmodule"
 
-const DialogsForm = (props) => {
-    return (
-        <form>
-            <Field component= {"input"} placeholder ={"Введите ваше сообщение"} />
-            <Field component= {"input"} placeholder ={"Введите ваше сообщение"} />
-            <Field component= {"input"} placeholder ={"Введите ваше сообщение"} />
-        <button>Add message</button>
 
-</form>
+// const DialogsForm = (props) => {
+// return (
+//         <form onSubmit = {props.handleSubmit}>
+//             <Field component= {"textarea"} placeholder ={"Введите ваше сообщение"} name = {"messagesForm"} />
+           
+//         <button>Add message</button>
 
-    )
-}
+// </form>
 
-const DialogsFormForRedux = reduxForm({form: "dialogs"})(DialogsForm)
+//     )
 
-const FinalDialogsForm = (props) => {
-    return ( <div>
-        <h1>DialogsForm</h1>
-        <DialogsFormForRedux/>
-        </div>
-    )
-}
-export default FinalDialogsForm
+// }
+
+
+
+// const FinalDialogsForm = (props) => {
+//     return ( <div>
+//         <h1>DialogsForm</h1>
+//         <DialogsFormForRedux onSubmit = {AddNewMessage}/>
+//         </div>
+//     )
+// }
+
+
+// let AddNewMessage = (values) => {
+//     props.Dialogs.addDialog(values.messagesForm)
+// }
+
+// export default FinalDialogsForm

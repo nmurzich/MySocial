@@ -1,0 +1,6 @@
+.formStyles.error textarea
+{border: solid 3px red}
+
+.formStyles.error span {
+    color: red
+}

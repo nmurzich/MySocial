@@ -2,6 +2,9 @@ import React from 'react';
 import Dialog from './Dialogs.module.css'
 import { NavLink, Redirect } from "react-router-dom"
 import  DialogsForm from '../Dialogs/DialogsForm'
+import { Field, reduxForm } from 'redux-form'
+
+
 
 const Dialogs = (props) => {
 
@@ -9,13 +12,14 @@ const Dialogs = (props) => {
 
     let MessName = props.dialogPage.messdata.map(m => <Mess dialog={m.dialog} />)
 
-    let addDialog = () => {
-        props.addDialog()
-    }
+    // let addDialog = () => {
+    //     props.addDialog()
+    // }
+    let addMessage = (values) => {props.addDialog(values.dialogsform)}
 
-    let onChangeDialogs = (e) => {
-        let body = e.target.value
-        props.updateDi(body)}
+    // let onChangeDialogs = (e) => {
+    //     let body = e.target.value
+    //     props.updateDi(body)}
 
     
     // let onChangeDialogs = (e) => {
@@ -23,9 +27,9 @@ const Dialogs = (props) => {
     //     let action = updateDiActionCreator(body)
     //     props.dispatch(action)
     // }
-if (!props.IsAuth) return <Redirect to = "/login"/>
-    return (
-        <div className='grid'>
+if (!props.IsAuth) return <Redirect to = "/login"/> 
+return (<div>
+<div className='grid'>
             <div>
                 {SendersName}
             </div>
@@ -33,12 +37,33 @@ if (!props.IsAuth) return <Redirect to = "/login"/>
                 {MessName}
             </div>
             <div>
-                <textarea onChange={onChangeDialogs} value={props.di}></textarea>
-                <button onClick={addDialog}>Add text</button>
+            <DialogsFormForRedux onSubmit = {addMessage}/>
+               
             </div>
-            <DialogsForm/>
-        </div>)
+           
+        </div>
+
+        </div>
+)
+    }
+
+
+
+const FinalDialogsForm = (props) => {
+    return (
+        <form onSubmit = {props.handleSubmit}>
+        <Field component= {'textarea'} name = {'dialogsform'} placeholder ={"Введите ваше сообщение"}
+        // onChange={onChangeDialogs} value={props.di} 
+        />
+        <button>Add text</button>
+        </form>
+    )
 }
+const DialogsFormForRedux = reduxForm({form: "dialogs"})(FinalDialogsForm)
+
+
+
+
 
 
 const Senders = (props) => {
@@ -64,5 +89,6 @@ const Mess = (props) => {
         </div>
     )
 }
+
 
 export default Dialogs
