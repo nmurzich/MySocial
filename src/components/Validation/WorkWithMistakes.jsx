@@ -1,12 +1,12 @@
 import React from 'react'
-import formStyles from './WorkWithMistakes.module.css'
+import Style from '../Header/Header.module.css'
 
 export const Textarea = ({input, meta, ...props}) => {
+let someError = meta.touched && meta.error
 return (
 <div 
-className = {formStyles.formStyles + "" + (meta.touched && meta.error ? formStyles.error: "" )}
->
+className = {Style.formStylesError + "" + (someError ? Style.formStylesError : "" )}>
 <textarea {...input} {...props}/>
-{meta.touched && meta.error && <span>{meta.error}</span>}
+{someError && <span>{meta.error}</span>}
 </div>
 )}

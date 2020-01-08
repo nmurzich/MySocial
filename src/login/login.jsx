@@ -1,6 +1,9 @@
 import React from 'react';
-
-import {Field, reduxForm} from "redux-form";
+import {LoginThunk} from '../components/Header/AuthReducer'
+import {connect} from 'react-redux'
+import {Field, reduxForm} from "redux-form"
+import {Redirect} from "react-router-dom"
+import style from '../components/Header/Header.module.css'
 
 const LoginForm= (props) => {
 
@@ -10,13 +13,13 @@ const LoginForm= (props) => {
 
             <div>
 
-                <Field placeholder={"Login"} name={"login"} component={"input"}/>
+                <Field placeholder={"email"} name={"email"} component={"input"}/>
 
             </div>
 
             <div>
 
-                <Field placeholder={"Password"} name={"password"} component={"input"}/>
+                <Field placeholder={"Password"} name={"password"} component={"input"} type = {"password"}/>
 
             </div>
 
@@ -24,12 +27,15 @@ const LoginForm= (props) => {
 
                 <Field component={"input"} name={"rememberMe"} type={"checkbox"}/> remember me
 
+                <Field component={"input"} name={"captcha"} /> 
             </div>
 
             <div>
+            { props.error && <div className={style.commonError}>
 
+{props.error} </div>}
                 <button>Login</button>
-
+                
             </div>
 
         </form>
@@ -43,16 +49,14 @@ const LoginForm= (props) => {
 const LoginFormforRedux =  reduxForm({form: 'login'})(LoginForm)
 
 
-
 const LoginFinallForm = (props) => {
 
     const onSubmit = (formData) => {
-
-        console.log(formData);
+        props.LoginThunk(formData.email, formData.password, formData.rememberMe);
 
     }
-
-
+    if (props.IsAuth) {
+        return <Redirect to={"/profile"} />}
 
     return <div>
 
@@ -64,4 +68,9 @@ const LoginFinallForm = (props) => {
 
 }
 
-export default LoginFinallForm;
+// let MapStatetoProps = (state) => ({
+//     IsAuth: state.autorization.IsAuth
+// })
+
+export default connect(null, {LoginThunk})(LoginFinallForm);
+

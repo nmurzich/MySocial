@@ -1,4 +1,5 @@
 import {usersAPI} from '../../api/api'
+import {stopSubmit } from 'redux-form'
 
 let InitialState = 
 {id: null, 
@@ -12,7 +13,7 @@ const authReducer = (state = InitialState, action) => {
     case "AUTH-REDUCER-AC":
     return {...state, 
         ...action.data, 
-        IsAuth: true
+        // IsAuth: true
     }
 
     default: return state
@@ -20,7 +21,7 @@ const authReducer = (state = InitialState, action) => {
 }
 }
 
-export const authReducerAC = (id, email, login) => ({type: "AUTH-REDUCER-AC", data: {id, email, login}})
+export const authReducerAC = (id, email, login, IsAuth) => ({type: "AUTH-REDUCER-AC", data: {id, email, login, IsAuth}})
 
 
 // export const authReducerThunk = () => (dispatch) => {
@@ -40,10 +41,35 @@ export const AuthReducerThunk = () => {
                 .then(response => {
            if (response.data.resultCode === 0) {            
            let {id, email, login} = response.data.data;
-            dispatch(authReducerAC(id, email, login))}})
+            dispatch(authReducerAC(id, email, login, true))}})
         
 
     }
-}        
+}   
+
+export const LoginThunk = (email, password, rememberMe) => (dispatch) => { 
+    usersAPI.getLogin(email, password, rememberMe)
+    .then(response => {
+        if (response.data.resultCode===0) {
+            dispatch(AuthReducerThunk())}
+            else {
+                let message = response.data.messages.length > 0 ? response.data.messages[0]: 'Some error'
+                 dispatch(stopSubmit ("login", {_error: message}))}
+
+        })
+    }
+
+export const LogoutThunk = () => (dispatch) => {
+    usersAPI.getLogout()
+    .then(response => {
+        if (response.data.resultCode === 0) {
+        dispatch(authReducerAC(null, null, null, false))}
+        
+    })}
+        
+        
+        
+
+
 
 export default authReducer

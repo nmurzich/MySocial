@@ -14,8 +14,16 @@
         color: rgb(61, 42, 165);
     }
     
+.commonError {
+    color: red;
+    border: red
+}
+.formStylesError textarea
+{border: solid 3px red}
 
-   
+.formStylesError span {
+    color: red
+} 
     
     
 

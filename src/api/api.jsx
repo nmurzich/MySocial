@@ -23,6 +23,13 @@ getAuthMe () {
 },
 // },
 
+getLogin (email,password, rememberMe=false) {
+    return instance.post(`auth/login`, {email, password, rememberMe})
+},
+getLogout () {
+    return instance.delete(`auth/login`)
+},
+
 getFollow (userId) {
     return instance.post(`follow/${userId}`, {}, )},
     // .then(response => {if(response.data.resultCode == 0) {followed(userId)}})},
@@ -32,6 +39,8 @@ getUnFollow (userId) {
     
                         // .then(response => {if (response.data.resultCode == 1) unfollowed(userId) })
 },
+
+
 
 getProfileInfoContainer (userId) {
     console.warn('Obsolete method. Please profileAPI object.')

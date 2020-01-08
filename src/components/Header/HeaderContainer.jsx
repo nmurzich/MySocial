@@ -4,7 +4,7 @@ import React from 'react';
 import {connect} from 'react-redux'
 import {authReducerAC} from './AuthReducer'
 import { usersAPI } from '../../api/api'
-import { AuthReducerThunk } from '../Header/AuthReducer'
+import { AuthReducerThunk, LogoutThunk } from '../Header/AuthReducer'
 
 
 
@@ -44,6 +44,7 @@ let mapStateToProps = (state) => ({
 export default connect (mapStateToProps, 
     {
         authReducerAC,
-        AuthReducerThunk
+        AuthReducerThunk,
+        LogoutThunk
 })
     (HeaderContainer)

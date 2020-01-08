@@ -22,7 +22,7 @@ class ProfileInfoContainer extends React.Component {
 
     componentDidMount() {
         let userId = this.props.match.params.userId
-            if (!userId) {userId=2}
+            if (!userId) {userId=this.props.avtorizationUserId}
     
     this.props.getProfileThunk(userId)
     // this.props.getUserStatusThunk(this.props.userId)
@@ -68,6 +68,8 @@ let MapDispatchtoProps = (state) => ({
     lookingForAJobDescription: state.profilePage.lookingForAJobDescription,
     fullName: state.profilePage.fullName,
     status: state.profilePage.status,
+    avtorizationUserId: state.autorization.id,
+    IsAuth: state.autorization.IsAuth
         
 })
 
