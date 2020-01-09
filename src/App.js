@@ -18,14 +18,23 @@ import FriendsOnlineContainer from './components/Sidebar/FriendsOnlineContainer'
 import UsersContainer from './components/Sidebar/Dialogs/UsersContainer'
 import HeaderContainer from './components/Header/HeaderContainer'
 import Login from './login/login'
+import {InitializationThuhk} from './Redux/appReducer'
+import {connect} from 'react-redux'
+import {withRouter} from 'react-router-dom'
+import {compose} from 'redux'
+import {Component} from 'react';
+import PreloaderMe from './components/Sidebar/Dialogs/PreloaderMe.jsx'
 
 
+class App extends Component {
+  сomponentDidMount() {
+  this.props.InitializationThuhk()}
 
-const App = () => {
+  render() {
+    // if (!this.props.initializing) {
+    //   return <PreloaderMe/>} 
 
-  
   return (
-
     
     <div className="grid">
          <HeaderContainer/>
@@ -67,12 +76,16 @@ const App = () => {
 
         </div>
         
-        
-            
-      
-  </div>
+         </div>
   
          )
 }
+}
 
-export default App
+export let mapdispatchtoProps = (state) => (
+  {initializing: state.app.initializing}
+)
+export default compose(
+withRouter,
+connect (mapdispatchtoProps, {InitializationThuhk}))
+  (App)

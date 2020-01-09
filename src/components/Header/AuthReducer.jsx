@@ -67,8 +67,7 @@ export const LogoutThunk = () => (dispatch) => {
         
     })}
         
-        
-        
+   
 
 
 
