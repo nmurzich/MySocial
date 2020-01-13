@@ -15,6 +15,8 @@ import {WithAuthRedirect} from '../../../HoC/withAuthRedirect'
 import {compose} from 'redux'
 import getUserStatusThunk from '../../../Redux/profilePageReducer'
 import updateUserStatusThunk from '../../../Redux/profilePageReducer'
+import {getProfile, getaboutMe, getcontacts, getlookingForAJob, getlookingForAJobDescription, 
+    getfullName, getstatus, getavtorizationUserId, getIsAuth} from '../../../selectors.jsx/selectorsForProfileInfo'
 
 
 
@@ -24,9 +26,10 @@ class ProfileInfoContainer extends React.Component {
         let userId = this.props.match.params.userId
             if (!userId) {userId=this.props.avtorizationUserId}
     
+    
+    // this.props.getUserStatusThunk(userId)
     this.props.getProfileThunk(userId)
-    // this.props.getUserStatusThunk(this.props.userId)
-   
+  
         
     // let userId = this.props.match.params.userId
     // if (!userId) {userId=2}
@@ -61,24 +64,26 @@ render() {
 // let HocAuthConnect = connect(MapDispatchtoAuth)(HocAuthConnect)
 
 let MapDispatchtoProps = (state) => ({
-    profile: state.profilePage.profile,
-    aboutMe: state.profilePage.aboutMe,
-    contacts: state.profilePage.contacts,
-    lookingForAJob: state.profilePage.lookingForAJob,
-    lookingForAJobDescription: state.profilePage.lookingForAJobDescription,
-    fullName: state.profilePage.fullName,
-    status: state.profilePage.status,
-    avtorizationUserId: state.autorization.id,
-    IsAuth: state.autorization.IsAuth
+    profile: getProfile(state),
+    aboutMe: getaboutMe(state),
+    contacts: getcontacts(state),
+    lookingForAJob: getlookingForAJob(state),
+    lookingForAJobDescription: getlookingForAJobDescription(state),
+    fullName: getfullName(state),
+    status: getstatus(state),
+    avtorizationUserId: getavtorizationUserId(state),
+    IsAuth: getIsAuth(state)
         
 })
 
 
-export default connect(MapDispatchtoProps, {    getProfileThunk, 
+export default compose(
+       connect(MapDispatchtoProps, {    getProfileThunk, 
     //  updateUserStatusThunk,
     //  getUserStatusThunk,
-    })(withRouter
-     (ProfileInfoContainer))
+    }),
+    withRouter)
+     (ProfileInfoContainer)
 
 // let HocRedirect = WithAuthRedirect(ProfileInfoContainer)
 

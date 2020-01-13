@@ -24,15 +24,15 @@ import {withRouter} from 'react-router-dom'
 import {compose} from 'redux'
 import {Component} from 'react';
 import PreloaderMe from './components/Sidebar/Dialogs/PreloaderMe.jsx'
-
+import Game from './game/game'
 
 class App extends Component {
   сomponentDidMount() {
   this.props.InitializationThuhk()}
 
   render() {
-    // if (!this.props.initializing) {
-    //   return <PreloaderMe/>} 
+    if (this.props.initializing) {
+      return <PreloaderMe/>} 
 
   return (
     
@@ -67,8 +67,10 @@ class App extends Component {
         <Route path = '/music' render = {() => <Music/>}/>
         <Route path = '/settings'render = {()=> <Settings/>}/>
         <Route path = '/news' render = {()=><News/>}/>
+        <Route path = '/game' render = {()=><Game/>}/>
         <Route path = '/users' render = {()=><UsersContainer/>}/>
         <Route path = '/login' render = {()=><Login/>}/>
+
 
         
         
@@ -82,10 +84,10 @@ class App extends Component {
 }
 }
 
-export let mapdispatchtoProps = (state) => (
+export let mapStatetoProps = (state) => (
   {initializing: state.app.initializing}
 )
 export default compose(
 withRouter,
-connect (mapdispatchtoProps, {InitializationThuhk}))
+connect (mapStatetoProps, {InitializationThuhk}))
   (App)

@@ -25,6 +25,8 @@ const Sidebar = (props) => {
     <a href = "Music">Music</a></li>
  <li className = {`${Sbr.item} ${Sbr.active}`}>
     <a href = "/Settings">Settings</a></li>
+    {<li className = {Sbr.item}> 
+ <NavLink to ="/Game">Game</NavLink></li>}
     
    
    

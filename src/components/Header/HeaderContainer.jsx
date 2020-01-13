@@ -25,13 +25,14 @@ class HeaderContainer extends React.Component {
         //     this.props.authReducerAC(id, email, login)}})
         
                 
-        }
+    } 
     render() {
 
 return <Header {...this.props}/>
 
     }
 }
+
 
 
 let mapStateToProps = (state) => ({

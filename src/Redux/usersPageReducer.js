@@ -104,6 +104,7 @@ export const getUsersThunkCreator = (currentPage, pageSize) => {
         .then(response=> { 
             dispatch(FetchingAC(false))
             dispatch(setUsersAC(response.data.items))
+            dispatch(setCurrentPageAC(currentPage))
         dispatch(setPageSizeAC(response.data.totalCount))})
 
 }

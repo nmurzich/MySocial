@@ -35,16 +35,14 @@ export const authReducerAC = (id, email, login, IsAuth) => ({type: "AUTH-REDUCER
 //          authReducerAC(id, email, login)}})
 //         }
              
-export const AuthReducerThunk = () => {
-    return (dispatch) => {
-        usersAPI.getAuthMe()
+export const AuthReducerThunk = () => (dispatch) => {
+    return usersAPI.getAuthMe()
                 .then(response => {
            if (response.data.resultCode === 0) {            
            let {id, email, login} = response.data.data;
             dispatch(authReducerAC(id, email, login, true))}})
-        
+           
 
-    }
 }   
 
 export const LoginThunk = (email, password, rememberMe) => (dispatch) => { 

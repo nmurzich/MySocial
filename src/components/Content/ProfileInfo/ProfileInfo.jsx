@@ -16,9 +16,7 @@ const ProfileInfo = (props) => {
         <div className = "content"> 
                        <img src = 'https://storge.pic2.me/upload/704/585847e883b48.jpg'/>
 
-                       {/* <div> <ProfileStatus status = {props.status} 
-                       updateUserStatusThunk = {props.updateUserStatusThunk} 
-                       /></div>  */}
+                       
         
         
         

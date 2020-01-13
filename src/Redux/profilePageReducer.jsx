@@ -59,13 +59,13 @@ const profilePageReducer = (state = InitialState, action) => {
       case "FULL-NAME-AC": {
         return {...state, fullName: action.fullName}
       }
-case "GET-USER-STATUS": {
-        return {...state, status: action.status}
+// case "GET-USER-STATUS": {
+//         return {...state, status:action.status}
       // }
       // case "UPDATE-USER-STATUS": {
       //   return {...state, status: action.status}
 
-      }
+      // }
 default: return state
 }
   }
@@ -106,7 +106,7 @@ export const fullNameAC = (fullName) => {
   return {type: "FULL-NAME-AC", fullName}
 }
 
-export const getUserStatusAC = (status) => ({type: "GET-USER-STATUS", status})
+// export const getUserStatusAC = (status) => ({type: "GET-USER-STATUS", status})
 
 
 // export const updateUserStatusAC = (status) => {return {type: "UPDATE-USER-STATUS", status: status}}
@@ -119,15 +119,16 @@ export const getProfileThunk = (userId) => {
 
 
 
-export let getUserStatusThunk = (userId) => (dispatch) => {
-   profileAPI.getUserStatus(userId)
-  .then(response => {dispatch(getUserStatusAC(response.data))})
-      }
+// export const getUserStatusThunk = (userId) => (dispatch) => {
+//    profileAPI.getUserStatus(userId)
+//   .then(response => {dispatch(getUserStatusAC(response.data))})
+//       }
 
-export let updateUserStatusThunk = (status) => (dispatch) => {
- profileAPI.updateMyStatus(status)
-  .then(response => {if (response.data.resultCode ===  0) {dispatch(getUserStatusAC(status))}
-})}
+
+// export const updateUserStatusThunk = (status) => (dispatch) => {
+//  profileAPI.updateMyStatus(status)
+//   .then(response => {if (response.data.resultCode ===  0) {dispatch(getUserStatusAC(status))}
+// })}
 
 // не работает getUserStatusThunk и updateUserStatusThunk (ошибка при чтении типа)
 
